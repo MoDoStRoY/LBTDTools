@@ -1,0 +1,10 @@
+﻿@*@using Newtonsoft.Json
+@model HomeIndexModel*@
+
+<div id='app-root'>Loading...</div>
+
+@section beforeScripts {
+    @*<script type="text/javascript">
+        window["user-info"] = @Html.Raw(Model.User != null ? JsonConvert.SerializeObject(Model.User) : "null");
+    </script>*@
+}
