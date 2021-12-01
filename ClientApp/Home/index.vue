@@ -2,18 +2,13 @@
   <div>{{test}}</div>
 </template>
 
-<script>
+<script lang="ts">
 
-export default
-{
-  name: "index",
-  
-  data: function ()
-  {
-    return{
-      test: "хуй123"
-    }
-  }
+import {Component, Vue} from "vue-property-decorator";
+
+@Component
+export default class Index extends Vue {
+  test = "хуй123";
 }
 </script>
 
