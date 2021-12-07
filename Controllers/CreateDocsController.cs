@@ -1,3 +1,6 @@
+using System;
+using System.Diagnostics;
+using LBTDTools.ServerApp.Config.Objects.Docs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LBTDTools.Controllers
@@ -7,10 +10,11 @@ namespace LBTDTools.Controllers
     public class CreateDocsController : Controller
     {
         [HttpPost]
-        [Route("getAct")]
-        public void GetAct([FromBody] string Test)
+        [Route("GetAct")]
+        public Act GetAct([FromBody] Act act)
         {
-            
+            Debug.WriteLine("Да");
+            return act;
         }
     }
 }

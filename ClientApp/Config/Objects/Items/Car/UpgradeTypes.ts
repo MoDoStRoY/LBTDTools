@@ -1,89 +1,42 @@
 export default class UpgradeTypes
 {
-    public powerBumperFront: boolean;
-    public jennyFront: boolean;
-    public protectiveArcFront: boolean;
-    public vizor: boolean;
-    public steps: boolean;
-    public powerBumperBack: boolean;
-    public jennyBack: boolean;
-    public protectiveArcBack: boolean;
-    public wheelBracket: boolean;
-    public wheelBracketDoor: boolean;
-    public kung: boolean;
-    public carrier: boolean;
-    public ladder: boolean;
-    public manhole: boolean;
-    public metalRoof: boolean;
-    public farLights: boolean;
-    public dayLights: boolean;
-    public fogLights: boolean;
-    public workLights: boolean;
-    public snorkel: boolean;
-    public engineProtection: boolean;
-    public pullProtection: boolean;
-    public transmissionProtection: boolean;
-    public diskBrakesFront: boolean;
-    public diskBrakesBack: boolean;
-    public damper: boolean;
-    public waterBooster: boolean;
-    public sleepingBag: boolean;
-    public liftSpring: boolean;
-    public liftSpacers: boolean;
-    public biggerTires: boolean;
-    public archExtenders: boolean;
+    public powerBumperFront: boolean = false;
+    public jennyFront: boolean = false;
+    public protectiveArcFront: boolean = false;
+    public vizor: boolean = false;
+    public steps: boolean = false;
+    public powerBumperBack: boolean = false;
+    public jennyBack: boolean = false;
+    public protectiveArcBack: boolean = false;
+    public wheelBracket: boolean = false;
+    public wheelBracketDoor: boolean = false;
+    public kung: boolean = false;
+    public carrier: boolean = false;
+    public ladder: boolean = false;
+    public manhole: boolean = true;
+    public metalRoof: boolean = false;
+    public farLights: boolean = false;
+    public dayLights: boolean = false;
+    public fogLights: boolean = false;
+    public workLights: boolean = false;
+    public snorkel: boolean = false;
+    public engineProtection: boolean = false;
+    public pullProtection: boolean = false;
+    public transmissionProtection: boolean = false;
+    public diskBrakesFront: boolean = false;
+    public diskBrakesBack: boolean = false;
+    public damper: boolean = false;
+    public waterBooster: boolean = false;
+    public sleepingBag: boolean = false;
+    public liftSpring: boolean = false;
+    public liftSpacers: boolean = false;
+    public biggerTires: boolean = false;
+    public archExtenders: boolean = false;
     
-    public gasSet: boolean;
-    public gasDelete: boolean;
-    public swapEngine: boolean;
-    public swapCategory: boolean;
+    public gasSet: boolean = false;
+    public gasDelete: boolean = false;
+    public swapEngine: boolean = false;
+    public swapCategory: boolean = false;
     
-    public armorDelete: boolean;
-    
-    constructor(powerBumperFront: boolean, jennyFront: boolean, protectiveArcFront: boolean, vizor: boolean, steps: boolean, powerBumperBack: boolean,
-                jennyBack: boolean, protectiveArcBack: boolean, wheelBracket: boolean, wheelBracketDoor: boolean, kung: boolean, carrier: boolean,
-                ladder: boolean, manhole: boolean, metalRoof: boolean, farLights: boolean, dayLights: boolean,
-                fogLights: boolean, workLights: boolean, snorkel: boolean, engineProtection: boolean, pullProtection: boolean,
-                transmissionProtection: boolean, diskBrakesFront: boolean, diskBrakesBack: boolean, damper: boolean, waterBooster: boolean,
-                sleepingBag: boolean, liftSpring: boolean, liftSpacers: boolean, biggerTires: boolean, archExtenders: boolean,
-                gasSet: boolean, gasDelete: boolean, swapEngine: boolean, swapCategory: boolean, armorDelete: boolean)
-    {
-        this.powerBumperFront = powerBumperFront;
-        this.jennyFront = jennyFront;
-        this.protectiveArcFront = protectiveArcFront;
-        this.vizor = vizor;
-        this.steps = steps;
-        this.powerBumperBack = powerBumperBack;
-        this.jennyBack = jennyBack;
-        this.protectiveArcBack = protectiveArcBack;
-        this.wheelBracket = wheelBracket;
-        this.wheelBracketDoor = wheelBracketDoor;
-        this.kung = kung;
-        this.carrier = carrier;
-        this.ladder = ladder;
-        this.manhole = manhole;
-        this.metalRoof = metalRoof;
-        this.farLights = farLights;
-        this.dayLights = dayLights;
-        this.fogLights = fogLights;
-        this.workLights = workLights;
-        this.snorkel = snorkel;
-        this.engineProtection = engineProtection;
-        this.pullProtection = pullProtection;
-        this.transmissionProtection = transmissionProtection;
-        this.diskBrakesFront = diskBrakesFront;
-        this.diskBrakesBack = diskBrakesBack;
-        this.damper = damper;
-        this.waterBooster = waterBooster;
-        this.sleepingBag = sleepingBag;
-        this.liftSpring = liftSpring;
-        this.liftSpacers = liftSpacers;
-        this.biggerTires = biggerTires;
-        this.archExtenders = archExtenders;
-        this.gasSet = gasSet;
-        this.gasDelete = gasDelete;
-        this.swapEngine = swapEngine;
-        this.swapCategory = swapCategory;
-        this.armorDelete = armorDelete;
-    }
+    public armorDelete: boolean = false;
 }
