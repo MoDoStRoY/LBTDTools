@@ -12,7 +12,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Docs
         public string Number { get; set; }
         public string SampleCloseDate { get; set; }
         public string CarGiveDate { get; set; }
-        public string PPTOAdress { get; set; }
+        public string PPTOAddress { get; set; }
         public string NamePPTOExpert { get; set; }
     }
 }
