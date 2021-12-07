@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable AssignNullToNotNullAttribute
 
-namespace net_5_vue_webpack.Controllers
+namespace LBTDTools.Controllers
 {
     public class HomeController : Controller
     {

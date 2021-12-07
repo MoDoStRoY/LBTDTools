@@ -6,7 +6,8 @@ export function createRouter(): VueRouter {
         /*{path: '/Account/LostPassword', component: require('./Account/LostPassword.vue').default, meta: {allowAnonymous: true}},*/
         // stub for all other urls
         {path: '*', component: require('./Home/NotImplemented.vue').default},
-        {path: '/test', component: require('./TestPage.vue').default, meta: {allowAnonymous: true}, props: true},
+        {path: "/menu", component: require("./Pages/Main/MainPage.vue").default, meta: {allowAnonymous: true}, props: true},
+        {path: "/docs", component: require("./Pages/CreateDocuments/CreateDocumentsPage.vue").default, meta: {allowAnonymous: true}, props: true}
     ];
 
     let router = new VueRouter({mode: 'history', routes: routes});
