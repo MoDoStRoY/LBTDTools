@@ -419,8 +419,9 @@ export default class CreateDocumentsPage extends Vue {
           var a = document.createElement("a");
           document.body.appendChild(a);
           a.href = this.downloadLink;
-          a.download = "a.pdf";
+          a.download = "Акт измерения.docx";
           a.click();
+          document.body.removeChild(a);
         })
         .catch()
   }
