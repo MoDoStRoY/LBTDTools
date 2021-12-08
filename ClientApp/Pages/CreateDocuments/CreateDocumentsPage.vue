@@ -258,6 +258,7 @@ import Car from "../../Config/Objects/Items/Car/Car";
 import Engine from "../../Config/Objects/Items/Car/Parts/Engine";
 import UpgradeTypes from "../../Config/Objects/Items/Car/UpgradeTypes";
 import axios from "axios";
+import actRequest from "../../Scripts/CreateDocuments/Act";
 
 @Component
 export default class CreateDocumentsPage extends Vue {
@@ -403,28 +404,11 @@ export default class CreateDocumentsPage extends Vue {
         this.chassisNumberCar, this.bodyNumberCar, new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine),
         new UpgradeTypes()), this.numberAct, this.sampleCloseDateAct, this.carGiveDateService, this.PPTOAddressAct,
         this.namePPTOExpertAct);
-
-    axios(
-        {
-          method: "post",
-          url: "api/CreateDocs/GetAct",
-          data: JSON.stringify(act),
-          headers: {"Content-Type": "application/json"},
-          responseType: "blob",
-        })
-        .then((response: any) => 
-        {
-          this.downloadLink = window.URL.createObjectURL(new Blob([response.data]));
-          
-          var a = document.createElement("a");
-          document.body.appendChild(a);
-          a.href = this.downloadLink;
-          a.download = "Акт измерения.docx";
-          a.click();
-          document.body.removeChild(a);
-        })
-        .catch()
+    
+    this.downloadLink = actRequest(act);
   }
+    
+    
 }
 </script>
 
