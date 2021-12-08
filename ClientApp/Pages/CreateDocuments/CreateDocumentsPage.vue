@@ -23,6 +23,8 @@
       </div>
       
       <b-button v-on:click="getAct"><strong>ТЕСТОВАЯ КНОПКА</strong></b-button>
+      <b-button tag="router-link" :to="{path: downloadLink}"><strong>СКАЧАТЬ</strong></b-button>
+      <b-button>{{downloadLink}}</b-button>
       
     </div>
 
@@ -268,6 +270,8 @@ export default class CreateDocumentsPage extends Vue {
   displayServiceBtnTitle: string = "Показать данные по производителю работ";
   displayAutoFlag: boolean = false;
   displayAutoBtnTitle: string = "Показать данные по ТС";
+  
+  downloadLink: string = "";
 
   /* Переменные переключения выпускаемых док-ов */
   docAny: boolean = false;
@@ -403,25 +407,20 @@ export default class CreateDocumentsPage extends Vue {
     axios(
         {
           method: "post",
-          url: "/CreateDocs/GetAct",
+          url: "api/CreateDocs/GetAct",
           data: JSON.stringify(act),
           headers: {"Content-Type": "application/json"},
+          responseType: "blob",
         })
         .then((response: any) => 
         {
-          //handle success
-          //console.log(response);
-          //console.log(response.text());
-          if (response.data.ok) 
-          {
-            console.log("Получилосс");
-            console.log(response.data.obj);
-          } 
-          else 
-          {
-            console.log("Вышла хуйня");
-            console.log(response.data);
-          }
+          this.downloadLink = window.URL.createObjectURL(new Blob([response.data]));
+          
+          var a = document.createElement("a");
+          document.body.appendChild(a);
+          a.href = this.downloadLink;
+          a.download = "a.pdf";
+          a.click();
         })
         .catch()
   }

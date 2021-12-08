@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using LBTDTools.ServerApp.Config.Objects.Docs;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +12,12 @@ namespace LBTDTools.Controllers
     {
         [HttpPost]
         [Route("GetAct")]
-        public Act GetAct([FromBody] Act act)
+        public PhysicalFileResult GetAct([FromBody] Act act)
         {
-            Debug.WriteLine("Да");
-            return act;
+            string path = Path.GetFullPath("test.pdf");
+            string type="application/pdf";
+            string name = "file.pdf";
+            return PhysicalFile(path, type, name);
         }
     }
 }

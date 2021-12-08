@@ -4,27 +4,27 @@ import Car from "../Items/Car/Car";
 
 export default class Act
 {
-    public laboratory: Laboratory;
-    public service: Service;
-    public car: Car;
+    public Laboratory: Laboratory;
+    public Service: Service;
+    public Car: Car;
 
-    public number: string;
-    public sampleCloseDate: string;
-    public carGiveDate: string;
+    public Number: string;
+    public SampleCloseDate: string;
+    public CarGiveDate: string;
     public PPTOAddress: string;
-    public namePPTOExpert: string;
+    public NamePPTOExpert: string;
     
-    constructor(laboratory: Laboratory, service: Service, car: Car, number: string,
-                sampleCloseDate: string, carGiveDate: string, PPTOAddress: string,
-                namePPTOExpert: string) 
+    constructor(Laboratory: Laboratory, Service: Service, Car: Car, Number: string,
+                SampleCloseDate: string, CarGiveDate: string, PPTOAddress: string,
+                NamePPTOExpert: string) 
     {
-        this.laboratory = laboratory;
-        this.service = service;
-        this.car = car;
-        this.number = number;
-        this.sampleCloseDate = sampleCloseDate;
-        this.carGiveDate = carGiveDate;
+        this.Laboratory = Laboratory;
+        this.Service = Service;
+        this.Car = Car;
+        this.Number = Number;
+        this.SampleCloseDate = SampleCloseDate;
+        this.CarGiveDate = CarGiveDate;
         this.PPTOAddress = PPTOAddress;
-        this.namePPTOExpert = namePPTOExpert
+        this.NamePPTOExpert = NamePPTOExpert
     }
 }
