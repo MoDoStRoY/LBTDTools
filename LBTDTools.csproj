@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="ServerApp\Config\Docs\Acts" />
       <Folder Include="Views" />
     </ItemGroup>
 

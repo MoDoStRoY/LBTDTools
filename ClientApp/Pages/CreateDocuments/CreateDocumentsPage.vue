@@ -23,8 +23,6 @@
       </div>
       
       <b-button v-on:click="getAct"><strong>ТЕСТОВАЯ КНОПКА</strong></b-button>
-      <b-button tag="router-link" :to="{path: downloadLink}"><strong>СКАЧАТЬ</strong></b-button>
-      <b-button>{{downloadLink}}</b-button>
       
     </div>
 
