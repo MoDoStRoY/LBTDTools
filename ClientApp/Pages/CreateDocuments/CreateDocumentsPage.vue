@@ -256,6 +256,7 @@ import Car from "../../Config/Objects/Items/Car/Car";
 import Engine from "../../Config/Objects/Items/Car/Parts/Engine";
 import UpgradeTypes from "../../Config/Objects/Items/Car/UpgradeTypes";
 import axios from "axios";
+import actRequest from "../../Scripts/CreateDocuments/Act";
 
 @Component
 export default class CreateDocumentsPage extends Vue {
@@ -268,6 +269,8 @@ export default class CreateDocumentsPage extends Vue {
   displayServiceBtnTitle: string = "Показать данные по производителю работ";
   displayAutoFlag: boolean = false;
   displayAutoBtnTitle: string = "Показать данные по ТС";
+  
+  downloadLink: string = "";
 
   /* Переменные переключения выпускаемых док-ов */
   docAny: boolean = false;
@@ -399,32 +402,11 @@ export default class CreateDocumentsPage extends Vue {
         this.chassisNumberCar, this.bodyNumberCar, new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine),
         new UpgradeTypes()), this.numberAct, this.sampleCloseDateAct, this.carGiveDateService, this.PPTOAddressAct,
         this.namePPTOExpertAct);
-
-    axios(
-        {
-          method: "post",
-          url: "/CreateDocs/GetAct",
-          data: JSON.stringify(act),
-          headers: {"Content-Type": "application/json"},
-        })
-        .then((response: any) => 
-        {
-          //handle success
-          //console.log(response);
-          //console.log(response.text());
-          if (response.data.ok) 
-          {
-            console.log("Получилосс");
-            console.log(response.data.obj);
-          } 
-          else 
-          {
-            console.log("Вышла хуйня");
-            console.log(response.data);
-          }
-        })
-        .catch()
+    
+    this.downloadLink = actRequest(act);
   }
+    
+    
 }
 </script>
 

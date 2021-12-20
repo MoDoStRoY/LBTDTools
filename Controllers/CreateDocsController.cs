@@ -1,7 +1,11 @@
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using LBTDTools.ServerApp.Config.Objects.Docs;
+using LBTDTools.ServerApp.Scripts.CreateDocuments;
 using Microsoft.AspNetCore.Mvc;
+using NPOI.XWPF.UserModel;
 
 namespace LBTDTools.Controllers
 {
@@ -11,10 +15,10 @@ namespace LBTDTools.Controllers
     {
         [HttpPost]
         [Route("GetAct")]
-        public Act GetAct([FromBody] Act act)
+        public PhysicalFileResult GetAct([FromBody] Act act)
         {
-            Debug.WriteLine("Да");
-            return act;
+            string[] buffer = DocAct.CreateAct(act).Split(';');
+            return PhysicalFile(buffer[0], buffer[1], buffer[2]);
         }
     }
 }
