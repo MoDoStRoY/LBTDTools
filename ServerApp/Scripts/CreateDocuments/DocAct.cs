@@ -1,4 +1,5 @@
 using System.IO;
+using LBTDTools.Extensions;
 using LBTDTools.ServerApp.Config.Docs.Properties;
 using LBTDTools.ServerApp.Config.Objects.Docs;
 using Microsoft.AspNetCore.Mvc;
@@ -7,15 +8,20 @@ using NPOI.XWPF.UserModel;
 
 namespace LBTDTools.ServerApp.Scripts.CreateDocuments
 {
-    public class DocAct
+    public interface IDocAct
     {
-        private static readonly ActProps Props = new();
-        private static string _pathToAnswerDoc;
-        private static XWPFDocument _sampleDoc;
-        private static FileStream _outStream;
-        private static Act _actObj;
+        public string CreateAct(Act actObjIn);
+    }
 
-        public static string CreateAct(Act actObjIn)
+    public class DocAct : IDocAct
+    {
+        private readonly ActProps Props = new();
+        private string _pathToAnswerDoc;
+        private XWPFDocument _sampleDoc;
+        private FileStream _outStream;
+        private Act _actObj;
+
+        public string CreateAct(Act actObjIn)
         {
             _actObj = actObjIn;
             _pathToAnswerDoc = Props.PathToAnswerDoc;
@@ -30,7 +36,7 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
             return _pathToAnswerDoc + ";" + Props.TypeOfAnswerDoc + ";" + Props.NameOfAnswerDoc;
         }
 
-        private static void ReadSample()
+        private void ReadSample()
         {
             FileStream inStream = new FileStream(Props.PathToSample, FileMode.Open, FileAccess.Read);
             _sampleDoc = new XWPFDocument(inStream);
@@ -38,19 +44,19 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
             inStream.Dispose();
         }
 
-        private static void CorrectPathToAnswerDoc()
+        private void CorrectPathToAnswerDoc()
         {
             Program.Server.DocActCounter++;
             _pathToAnswerDoc += "Act_" + Program.Server.DocActCounter + ".docx";
         }
 
-        private static void CreateBufferFile()
+        private void CreateBufferFile()
         {
             File.Create(_pathToAnswerDoc).Close();
         }
         
 
-        private static void PutData()
+        private void PutData()
         {
             foreach (var para in _sampleDoc.Paragraphs)
             {
@@ -81,8 +87,13 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
                         {
                             foreach (XWPFRun r in p.Runs)
                             {
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$expertFinaleNumber}",
-                                    _actObj.Laboratory.FinaleNumber), 0);
+                                /*r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$expertFinaleNumber}",
+                                    _actObj.Laboratory.FinaleNumber), 0);*/
+                                
+                                // за счет расширения Replace немного упрощаем вызов замены текста, подробней можешь увидеть при переходе в метод Replace
+                                r.Replace("{$expertFinaleNumber}", _actObj.Laboratory.FinaleNumber);
+                                
+                                // @todo сделать по аналогии так же везде
                                 r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$checkDate}",
                                     _actObj.SampleCloseDate), 0);
                                 r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$giveAutoDate}", 
@@ -110,13 +121,13 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
             }
         }
 
-        private static void WriteData()
+        private void WriteData()
         {
             _outStream = new FileStream(_pathToAnswerDoc, FileMode.Create);
             _sampleDoc.Write(_outStream);
         }
 
-        private static void CloseStreams()
+        private void CloseStreams()
         {
             _outStream.Close();
             _outStream.Dispose();

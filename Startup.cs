@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LBTDTools.ServerApp.Scripts.CreateDocuments;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,8 @@ namespace LBTDTools
         {
             #region MVC
 
+            s.AddSingleton<IDocAct, DocAct>();
+            
             s.AddMvc(o =>
                 {
                     o.EnableEndpointRouting = false;
