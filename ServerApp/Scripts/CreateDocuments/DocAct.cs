@@ -1,4 +1,5 @@
 using System.IO;
+using LBTDTools.ServerApp.Config.Docs.Properties;
 using LBTDTools.ServerApp.Config.Objects.Docs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -8,17 +9,16 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
 {
     public class DocAct
     {
-        private static string PathToSample = Path.GetFullPath("ServerApp/Config/Docs/Samples/ActSample.docx");
-        private static string PathToAnswerDoc = Path.GetFullPath("ServerApp/Config/Docs/Acts/");
-        private static string TypeOfAnswerDoc = "application/docx";
-        private static string NameOfAnswerDoc = "Акт измерения.docx";
-        private static XWPFDocument SampleDoc;
-        private static FileStream OutStream;
-        private static Act actObj;
+        private static readonly ActProps Props = new();
+        private static string _pathToAnswerDoc;
+        private static XWPFDocument _sampleDoc;
+        private static FileStream _outStream;
+        private static Act _actObj;
 
-        public static string CreateAct(Act actObj)
+        public static string CreateAct(Act actObjIn)
         {
-            DocAct.actObj = actObj;
+            _actObj = actObjIn;
+            _pathToAnswerDoc = Props.PathToAnswerDoc;
             
             ReadSample();
             CorrectPathToAnswerDoc();
@@ -27,13 +27,13 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
             WriteData();
             CloseStreams();
 
-            return PathToAnswerDoc + ";" + TypeOfAnswerDoc + ";" + NameOfAnswerDoc;
+            return _pathToAnswerDoc + ";" + Props.TypeOfAnswerDoc + ";" + Props.NameOfAnswerDoc;
         }
 
         private static void ReadSample()
         {
-            FileStream inStream = new FileStream(PathToSample, FileMode.Open, FileAccess.Read);
-            SampleDoc = new XWPFDocument(inStream);
+            FileStream inStream = new FileStream(Props.PathToSample, FileMode.Open, FileAccess.Read);
+            _sampleDoc = new XWPFDocument(inStream);
             inStream.Close();
             inStream.Dispose();
         }
@@ -41,37 +41,37 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
         private static void CorrectPathToAnswerDoc()
         {
             Program.Server.DocActCounter++;
-            PathToAnswerDoc += "Act_" + Program.Server.DocActCounter + ".docx";
+            _pathToAnswerDoc += "Act_" + Program.Server.DocActCounter + ".docx";
         }
 
         private static void CreateBufferFile()
         {
-            File.Create(PathToAnswerDoc).Close();
+            File.Create(_pathToAnswerDoc).Close();
         }
         
 
         private static void PutData()
         {
-            foreach (var para in SampleDoc.Paragraphs)
+            foreach (var para in _sampleDoc.Paragraphs)
             {
                 string oldText = para.ParagraphText;
                 
                 if (oldText == "")
-
                     continue;
                 
-                string tempText = para.ParagraphText;
-                
-                tempText = tempText.Replace("{$entity}", actObj.Service.Name);
-                tempText = tempText.Replace("{$checkPointAddress}", actObj.PPTOAddress);
-                tempText = tempText.Replace("{$actNumber}", actObj.Number);
-                tempText = tempText.Replace("{$date}", actObj.CarGiveDate);
-                tempText = tempText.Replace("{$PPTOExpertFIO}", actObj.NamePPTOExpert);
+                string newText = para.ParagraphText;
 
-                para.ReplaceText(oldText, tempText);
+                newText = NpoiMethods.ReplaceRun(newText, "{$expertFinaleNumber}", _actObj.Laboratory.FinaleNumber);
+                newText = NpoiMethods.ReplaceRun(newText, "{$entity}", _actObj.Service.Name);
+                newText = NpoiMethods.ReplaceRun(newText, "{$checkPointAddress}", _actObj.PPTOAddress);
+                newText = NpoiMethods.ReplaceRun(newText, "{$actNumber}", _actObj.Number);
+                newText = NpoiMethods.ReplaceRun(newText, "{$date}", _actObj.CarGiveDate);
+                newText = NpoiMethods.ReplaceRun(newText, "{$PPTOExpertFIO}", _actObj.NamePPTOExpert);
+
+                para.ReplaceText(oldText, newText);
             }
             
-            foreach (XWPFTable tbl in SampleDoc.Tables) 
+            foreach (XWPFTable tbl in _sampleDoc.Tables) 
             {
                 foreach (XWPFTableRow row in tbl.Rows) 
                 {
@@ -79,64 +79,30 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
                     {
                         foreach (XWPFParagraph p in cell.Paragraphs) 
                         {
-                            foreach (XWPFRun r in p.Runs) 
+                            foreach (XWPFRun r in p.Runs)
                             {
-                                string text = r.GetText(0);
-                                if (text != null && text.Contains("{$expertFinaleNumber}"))
-                                {
-                                    text = text.Replace("{$expertFinaleNumber}", actObj.Laboratory.FinaleNumber);
-                                    r.SetText(text, 0);
-                                }
-                                if (text != null && text.Contains("{$checkDate}"))
-                                {
-                                    text = text.Replace("{$checkDate}", actObj.SampleCloseDate);
-                                    r.SetText(text, 0);
-                                }
-                                if (text != null && text.Contains("{$giveAutoDate}"))
-                                {
-                                    text = text.Replace("{$giveAutoDate}", actObj.CarGiveDate);
-                                    r.SetText(text, 0);
-                                }
-                                if (text != null && text.Contains("{$checkPointAddress}"))
-                                {
-                                    text = text.Replace("{$checkPointAddress}", actObj.PPTOAddress);
-                                    r.SetText(text, 0);
-                                }
-                                if (text != null && text.Contains("{$brandModelAuto}"))
-                                {
-                                    text = text.Replace("{$brandModelAuto}", actObj.Car.Brand + " " + actObj.Car.Model);
-                                    r.SetText(text, 0);
-                                }
-                                if (text != null && text.Contains("{$govRegNum}"))
-                                {
-                                    text = text.Replace("{$govRegNum}", actObj.Car.GovRegNum);
-                                    r.SetText(text, 0);
-                                }
-                                if (text != null && text.Contains("{$VIN}"))
-                                {
-                                    text = text.Replace("{$VIN}", actObj.Car.VIN);
-                                    r.SetText(text, 0);
-                                }
-                                if (text != null && text.Contains("{$modelNumberEngine}"))
-                                {
-                                    text = text.Replace("{$modelNumberEngine}", actObj.Car.Engine.Model + " " + actObj.Car.Engine.Number);
-                                    r.SetText(text, 0);
-                                }
-                                if (text != null && text.Contains("{$color}"))
-                                {
-                                    text = text.Replace("{$color}", actObj.Car.Color);
-                                    r.SetText(text, 0);
-                                }
-                                if (text != null && text.Contains("{$engineType}"))
-                                {
-                                    text = text.Replace("{$engineType}", actObj.Car.Engine.Type);
-                                    r.SetText(text, 0);
-                                }
-                                if (text != null && text.Contains("{$fuel}"))
-                                {
-                                    text = text.Replace("{$fuel}", actObj.Car.Engine.Fuel);
-                                    r.SetText(text, 0);
-                                }
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$expertFinaleNumber}",
+                                    _actObj.Laboratory.FinaleNumber), 0);
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$checkDate}",
+                                    _actObj.SampleCloseDate), 0);
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$giveAutoDate}", 
+                                    _actObj.CarGiveDate), 0);
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$checkPointAddress}",
+                                    _actObj.PPTOAddress), 0);
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$brandModelAuto}", 
+                                    _actObj.Car.Brand + " " + _actObj.Car.Model), 0);
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$govRegNum}", 
+                                    _actObj.Car.GovRegNum), 0);
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$VIN}", 
+                                    _actObj.Car.VIN), 0);
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$modelNumberEngine}",
+                                    _actObj.Car.Engine.Model + " " + _actObj.Car.Engine.Number), 0);
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$color}", 
+                                    _actObj.Car.Color), 0);
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$engineType}", 
+                                    _actObj.Car.Engine.Type), 0);
+                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$fuel}",
+                                    _actObj.Car.Engine.Fuel), 0);
                             }
                         }
                     }
@@ -146,14 +112,14 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
 
         private static void WriteData()
         {
-            OutStream = new FileStream(PathToAnswerDoc, FileMode.Create);
-            SampleDoc.Write(OutStream);
+            _outStream = new FileStream(_pathToAnswerDoc, FileMode.Create);
+            _sampleDoc.Write(_outStream);
         }
 
         private static void CloseStreams()
         {
-            OutStream.Close();
-            OutStream.Dispose();
+            _outStream.Close();
+            _outStream.Dispose();
             //PathToAnswerDoc = Path.GetFullPath("ServerApp/Config/Docs/Acts/");
         }
     }
