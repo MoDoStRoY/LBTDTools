@@ -7,19 +7,21 @@ export default class Car
     public model: string;
     public color: string;
     public govRegNum: string;
+    public releaseDate: string;
     public VIN: string;
     public chassisNumber: string;
     public bodyNumber: string;
     public engine: Engine;
     public upgrades: UpgradeTypes;
 
-    constructor(brand: string, model: string, color: string, govRegNum: string, VIN: string, chassisNumber: string,
+    constructor(brand: string, model: string, color: string, govRegNum: string, releaseDate:string, VIN: string, chassisNumber: string,
                 bodyNumber: string, engine: Engine, upgrades: UpgradeTypes)
     {
         this.brand = brand;
         this.model = model;
         this.color = color;
         this.govRegNum = govRegNum;
+        this.releaseDate = releaseDate;
         this.VIN = VIN;
         this.chassisNumber = chassisNumber;
         this.bodyNumber = bodyNumber;

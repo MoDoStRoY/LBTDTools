@@ -29,7 +29,7 @@
     <div class="centerBlock">
 
       <div v-if="docAny">
-        <b-button type="is-warning" v-on:click="displayMod('displayModFlag')">{{ displayModBtnTitle }}</b-button>
+        <b-button type="is-warning" v-on:click="displayMod('displayModFlag')" expanded>{{ displayModBtnTitle }}</b-button>
         <div v-if="displayModFlag">
           <h1><strong>Внесённые изменения в конструкцию</strong></h1>
           <b-tabs>
@@ -107,7 +107,7 @@
 
       <div v-if="docAny">
         <hr>
-        <b-button v-on:click="displayMod('displayILFlag')" type="is-warning">{{ displayILBtnTitle }}</b-button>
+        <b-button v-on:click="displayMod('displayILFlag')" type="is-warning" expanded>{{ displayILBtnTitle }}</b-button>
         <div v-if="displayILFlag">
           <h1><strong>Данные по ИЛ и заключению</strong></h1>
 
@@ -130,7 +130,7 @@
 
       <div v-if="docAny">
         <hr>
-        <b-button v-on:click="displayMod('displayServiceFlag')" type="is-warning">{{ displayServiceBtnTitle }}</b-button>
+        <b-button v-on:click="displayMod('displayServiceFlag')" type="is-warning" expanded>{{ displayServiceBtnTitle }}</b-button>
         <div v-if="displayServiceFlag">
           <h1><strong>Данные по производителю работ и датам</strong></h1>
           <b-field label="Производитель работ (с полными ФИО)">
@@ -180,7 +180,7 @@
       
       <div v-if="docAny">
         <hr>
-        <b-button v-on:click="displayMod('displayAutoFlag')" type="is-warning">{{ displayAutoBtnTitle }}</b-button>
+        <b-button v-on:click="displayMod('displayAutoFlag')" type="is-warning" expanded>{{ displayAutoBtnTitle }}</b-button>
         <div v-if="displayAutoFlag">
           <div>
             
@@ -196,6 +196,12 @@
               </b-field>
               <b-field label="Гос.рег.знак" expanded>
                 <b-input v-model="govRegNumCar" placeholder="Например: А459БВ774"></b-input>
+              </b-field>
+            </b-field>
+            
+            <b-field grouped>
+              <b-field label="Год выпуска">
+                <b-input v-model="releaseDate" placeholder="Например: 2008"></b-input>
               </b-field>
             </b-field>
             
@@ -235,6 +241,31 @@
         </div>
       </div>
       
+      <div v-if="docAny">
+        <hr>
+        <b-button v-on:click="displayMod('displayClientFlag')" type="is-warning" expanded>{{ displayClientBtnTitle }}</b-button>
+        <div v-if="displayClientFlag">
+          
+          <b-field label="Данные собственника" grouped>
+            
+            <b-field label="ФИО" expanded>
+              <b-input v-model="nameClient" placeholder="Например: Иванов Иван Иванович"></b-input>
+            </b-field>
+            <b-field label="Серия и номер паспорта" expanded>
+              <b-input v-model="passportNumberClient" placeholder="Например: 7505 275013"></b-input>
+            </b-field>
+            <b-field label="Кем выдан паспорт" expanded>
+              <b-input v-model="passportAuthorClient" placeholder="Например: ГУ МВД РФ по Челябинской области"></b-input>
+            </b-field>
+            <b-field label="Адрес прописки" expanded>
+              <b-input v-model="addressClient" placeholder="Например: г. Челябинск, ул. Ленина, д.17, кв.3"></b-input>
+            </b-field>
+            
+          </b-field>
+          
+        </div>
+      </div>
+      
       <hr>
       
     </div>
@@ -269,6 +300,8 @@ export default class CreateDocumentsPage extends Vue {
   displayServiceBtnTitle: string = "Показать данные по производителю работ";
   displayAutoFlag: boolean = false;
   displayAutoBtnTitle: string = "Показать данные по ТС";
+  displayClientFlag: boolean = false;
+  displayClientBtnTitle: string = "Показать данные по клиенту";
   
   downloadLink: string = "";
 
@@ -322,6 +355,7 @@ export default class CreateDocumentsPage extends Vue {
 
   nameLab: string = "";
   finaleNumberLab: string = "";
+  
   nameService: string = "";
   entityAddressService: string = "";
   certificateDateService: string = "";
@@ -332,10 +366,12 @@ export default class CreateDocumentsPage extends Vue {
   PPTOAddressAct: string = "";
   namePPTOExpertAct: string = "";
   numberAct: string = "";
+  
   brandCar: string = "";
   modelCar: string = "";
   colorCar: string = "";
   govRegNumCar: string = "";
+  releaseDate: string = "";
   VINCar: string = "";
   chassisNumberCar: string = "";
   bodyNumberCar: string = "";
@@ -345,50 +381,81 @@ export default class CreateDocumentsPage extends Vue {
   fuelEngine: string = "";
   weightInspection: string = "";
 
-  switchDoc(): void {
+  nameClient: string = "";
+  passportNumberClient: string = "";
+  passportAuthorClient: string = "";
+  addressClient: string = "";
+
+  switchDoc(): void 
+  {
     if (this.docDeclaration || this.docAct)
       this.docAny = true;
     else this.docAny = false;
   }
 
-  displayMod(flag: string): void {
+  displayMod(flag: string): void 
+  {
     switch (flag) {
       case "displayModFlag":
-        if (!this.displayModFlag) {
+        if (!this.displayModFlag) 
+        {
           this.displayModFlag = true;
           this.displayModBtnTitle = "Скрыть виды переоборудования"
-        } else {
+        } 
+        else 
+        {
           this.displayModFlag = false;
           this.displayModBtnTitle = "Показать виды переоборудования"
         }
         break;
       case "displayILFlag":
-        if (!this.displayILFlag) {
+        if (!this.displayILFlag) 
+        {
           this.displayILFlag = true;
           this.displayILBtnTitle = "Скрыть данные по ИЛ"
-        } else {
+        } 
+        else 
+        {
           this.displayILFlag = false;
           this.displayILBtnTitle = "Показать данные по ИЛ"
         }
         break;
       case "displayServiceFlag":
-        if (!this.displayServiceFlag) {
+        if (!this.displayServiceFlag) 
+        {
           this.displayServiceFlag = true;
           this.displayServiceBtnTitle = "Скрыть данные по производителю работ"
-        } else {
+        } 
+        else 
+        {
           this.displayServiceFlag = false;
           this.displayServiceBtnTitle = "Показать данные по производителю работ"
         }
         break;
       case "displayAutoFlag":
-        if (!this.displayAutoFlag) {
+        if (!this.displayAutoFlag) 
+        {
           this.displayAutoFlag = true;
           this.displayAutoBtnTitle = "Скрыть данные по ТС"
-        } else {
+        } 
+        else 
+        {
           this.displayAutoFlag = false;
           this.displayAutoBtnTitle = "Показать данные по ТС"
         }
         break;
+        case "displayClientFlag":
+          if (!this.displayClientFlag) 
+          {
+            this.displayClientFlag = true;
+            this.displayClientBtnTitle = "Скрыть данные по клиенту"
+          } 
+          else 
+          {
+            this.displayClientFlag = false;
+            this.displayClientBtnTitle = "Показать данные по клиенту"
+          }
+          break;
     }
   }
 
@@ -398,7 +465,7 @@ export default class CreateDocumentsPage extends Vue {
         new Laboratory(this.nameLab, this.finaleNumberLab), 
         new Service(this.nameService, this.entityAddressService, this.certificateDateService, 
         this.certificateNumberService, this.certificateAuthorService), 
-        new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.VINCar,
+        new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar,
         this.chassisNumberCar, this.bodyNumberCar, new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine),
         new UpgradeTypes()), this.numberAct, this.sampleCloseDateAct, this.carGiveDateService, this.PPTOAddressAct,
         this.namePPTOExpertAct);

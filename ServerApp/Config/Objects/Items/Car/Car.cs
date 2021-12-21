@@ -8,6 +8,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car
         public string Model { get; set; }
         public string Color { get; set; }
         public string GovRegNum { get; set; }
+        public string ReleaseDate { get; set; }
         public string VIN { get; set; }
         public string ChassisNumber { get; set; }
         public string BodyNumber { get; set; }
