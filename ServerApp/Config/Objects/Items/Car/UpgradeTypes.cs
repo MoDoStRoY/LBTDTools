@@ -41,5 +41,19 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car
         public bool SwapCategory { get; set; } // Смена категории
         
         public bool ArmorDelete { get; set; } // Снятие брони
+
+        public string PowerBumperFrontText = "Передний силовой бампер";
+
+        public string GetUpgradesList()
+        {
+            string result = " ";
+
+            if (PowerBumperFront)
+            {
+                result += PowerBumperFrontText;
+            }
+
+            return result.Trim();
+        }
     }
 }

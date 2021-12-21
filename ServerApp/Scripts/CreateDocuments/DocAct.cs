@@ -86,13 +86,16 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
                                 r.Replace("{$checkDate}", _actObj.SampleCloseDate);
                                 r.Replace("{$giveAutoDate}", _actObj.CarGiveDate);
                                 r.Replace("{$checkPointAddress}", _actObj.PPTOAddress);
-                                r.Replace("{$brandModelAuto}", _actObj.Car.Brand + " " + _actObj.Car.Model);
+                                r.Replace("{$brandModelAuto}", _actObj.Car.GetFullName());
                                 r.Replace("{$govRegNum}", _actObj.Car.GovRegNum);
+                                r.Replace("{$releaseDate}", _actObj.Car.ReleaseDate);
+                                r.Replace("{$clientAndAddress}", _actObj.Client.GetInfo());
                                 r.Replace("{$VIN}", _actObj.Car.VIN);
-                                r.Replace("{$modelNumberEngine}", _actObj.Car.Engine.Model + " " + _actObj.Car.Engine.Number);
+                                r.Replace("{$modelNumberEngine}", _actObj.Car.Engine.GetFullName());
                                 r.Replace("{$color}", _actObj.Car.Color);
                                 r.Replace("{$engineType}", _actObj.Car.Engine.Type);
                                 r.Replace("{$fuel}", _actObj.Car.Engine.Fuel);
+                                r.Replace("{$equipment}", _actObj.Car.Upgrades.GetUpgradesList());
                             }
                         }
                     }

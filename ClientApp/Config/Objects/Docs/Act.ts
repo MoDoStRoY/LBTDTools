@@ -1,12 +1,14 @@
 import Laboratory from "../Items/Laboratory";
 import Service from "../Items/Service";
 import Car from "../Items/Car/Car";
+import Client from "../Items/Client";
 
 export default class Act
 {
     public Laboratory: Laboratory;
     public Service: Service;
     public Car: Car;
+    public Client: Client;
 
     public Number: string;
     public SampleCloseDate: string;
@@ -14,13 +16,14 @@ export default class Act
     public PPTOAddress: string;
     public NamePPTOExpert: string;
     
-    constructor(Laboratory: Laboratory, Service: Service, Car: Car, Number: string,
+    constructor(Laboratory: Laboratory, Service: Service, Car: Car, Client: Client, Number: string,
                 SampleCloseDate: string, CarGiveDate: string, PPTOAddress: string,
                 NamePPTOExpert: string) 
     {
         this.Laboratory = Laboratory;
         this.Service = Service;
         this.Car = Car;
+        this.Client = Client;
         this.Number = Number;
         this.SampleCloseDate = SampleCloseDate;
         this.CarGiveDate = CarGiveDate;

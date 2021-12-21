@@ -14,5 +14,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car
         public string BodyNumber { get; set; }
         public Engine Engine { get; set; }
         public UpgradeTypes Upgrades { get; set; }
+
+        public string GetFullName() { return Brand + " " + Model; }
     }
 }

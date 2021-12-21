@@ -1,6 +1,6 @@
 export default class UpgradeTypes
 {
-    public powerBumperFront: boolean = false;
+    public powerBumperFront: boolean = true;
     public jennyFront: boolean = false;
     public protectiveArcFront: boolean = false;
     public vizor: boolean = false;
@@ -13,7 +13,7 @@ export default class UpgradeTypes
     public kung: boolean = false;
     public carrier: boolean = false;
     public ladder: boolean = false;
-    public manhole: boolean = true;
+    public manhole: boolean = false;
     public metalRoof: boolean = false;
     public farLights: boolean = false;
     public dayLights: boolean = false;

@@ -288,6 +288,7 @@ import Engine from "../../Config/Objects/Items/Car/Parts/Engine";
 import UpgradeTypes from "../../Config/Objects/Items/Car/UpgradeTypes";
 import axios from "axios";
 import actRequest from "../../Scripts/CreateDocuments/Act";
+import Client from "../../Config/Objects/Items/Client";
 
 @Component
 export default class CreateDocumentsPage extends Vue {
@@ -467,8 +468,8 @@ export default class CreateDocumentsPage extends Vue {
         this.certificateNumberService, this.certificateAuthorService), 
         new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar,
         this.chassisNumberCar, this.bodyNumberCar, new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine),
-        new UpgradeTypes()), this.numberAct, this.sampleCloseDateAct, this.carGiveDateService, this.PPTOAddressAct,
-        this.namePPTOExpertAct);
+        new UpgradeTypes()), new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient), 
+        this.numberAct, this.sampleCloseDateAct, this.carGiveDateService, this.PPTOAddressAct, this.namePPTOExpertAct);
     
     this.downloadLink = actRequest(act);
   }
