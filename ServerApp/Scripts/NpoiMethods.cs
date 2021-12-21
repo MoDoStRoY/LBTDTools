@@ -1,15 +1,15 @@
+using NPOI.XWPF.UserModel;
+
 namespace LBTDTools.ServerApp.Scripts
 {
-    public class NpoiMethods
+    public static class NpoiMethods
     {
-        public static string ReplaceRun(string run, string oldString, string newString)
+        public static void Replace(this XWPFRun r, string oldString, string newString)
         {
-            if (!string.IsNullOrEmpty(run) && run.Contains(oldString))
+            if (!string.IsNullOrEmpty(r.GetText(0)) && r.GetText(0).Contains(oldString))
             {
-                run = run.Replace(oldString, newString);
+                r.SetText(r.GetText(0).Replace(oldString, newString), 0);
             }
-
-            return run;
         }
     }
 }

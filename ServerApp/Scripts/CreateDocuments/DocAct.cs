@@ -1,9 +1,6 @@
 using System.IO;
-using LBTDTools.Extensions;
 using LBTDTools.ServerApp.Config.Docs.Properties;
 using LBTDTools.ServerApp.Config.Objects.Docs;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using NPOI.XWPF.UserModel;
 
 namespace LBTDTools.ServerApp.Scripts.CreateDocuments
@@ -24,8 +21,7 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
         public string CreateAct(Act actObjIn)
         {
             _actObj = actObjIn;
-            _pathToAnswerDoc = Props.PathToAnswerDoc;
-            
+
             ReadSample();
             CorrectPathToAnswerDoc();
             CreateBufferFile();
@@ -47,7 +43,7 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
         private void CorrectPathToAnswerDoc()
         {
             Program.Server.DocActCounter++;
-            _pathToAnswerDoc += "Act_" + Program.Server.DocActCounter + ".docx";
+            _pathToAnswerDoc = Props.PathToAnswerDoc + "Act_" + Program.Server.DocActCounter + ".docx";
         }
 
         private void CreateBufferFile()
@@ -67,12 +63,11 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
                 
                 string newText = para.ParagraphText;
 
-                newText = NpoiMethods.ReplaceRun(newText, "{$expertFinaleNumber}", _actObj.Laboratory.FinaleNumber);
-                newText = NpoiMethods.ReplaceRun(newText, "{$entity}", _actObj.Service.Name);
-                newText = NpoiMethods.ReplaceRun(newText, "{$checkPointAddress}", _actObj.PPTOAddress);
-                newText = NpoiMethods.ReplaceRun(newText, "{$actNumber}", _actObj.Number);
-                newText = NpoiMethods.ReplaceRun(newText, "{$date}", _actObj.CarGiveDate);
-                newText = NpoiMethods.ReplaceRun(newText, "{$PPTOExpertFIO}", _actObj.NamePPTOExpert);
+                newText = newText.Replace("{$entity}", _actObj.Service.Name);
+                newText = newText.Replace("{$checkPointAddress}", _actObj.PPTOAddress);
+                newText = newText.Replace("{$actNumber}", _actObj.Number);
+                newText = newText.Replace("{$date}", _actObj.CarGiveDate);
+                newText = newText.Replace("{$PPTOExpertFIO}", _actObj.NamePPTOExpert);
 
                 para.ReplaceText(oldText, newText);
             }
@@ -87,33 +82,17 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
                         {
                             foreach (XWPFRun r in p.Runs)
                             {
-                                /*r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$expertFinaleNumber}",
-                                    _actObj.Laboratory.FinaleNumber), 0);*/
-                                
-                                // за счет расширения Replace немного упрощаем вызов замены текста, подробней можешь увидеть при переходе в метод Replace
                                 r.Replace("{$expertFinaleNumber}", _actObj.Laboratory.FinaleNumber);
-                                
-                                // @todo сделать по аналогии так же везде
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$checkDate}",
-                                    _actObj.SampleCloseDate), 0);
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$giveAutoDate}", 
-                                    _actObj.CarGiveDate), 0);
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$checkPointAddress}",
-                                    _actObj.PPTOAddress), 0);
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$brandModelAuto}", 
-                                    _actObj.Car.Brand + " " + _actObj.Car.Model), 0);
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$govRegNum}", 
-                                    _actObj.Car.GovRegNum), 0);
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$VIN}", 
-                                    _actObj.Car.VIN), 0);
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$modelNumberEngine}",
-                                    _actObj.Car.Engine.Model + " " + _actObj.Car.Engine.Number), 0);
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$color}", 
-                                    _actObj.Car.Color), 0);
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$engineType}", 
-                                    _actObj.Car.Engine.Type), 0);
-                                r.SetText(NpoiMethods.ReplaceRun(r.GetText(0), "{$fuel}",
-                                    _actObj.Car.Engine.Fuel), 0);
+                                r.Replace("{$checkDate}", _actObj.SampleCloseDate);
+                                r.Replace("{$giveAutoDate}", _actObj.CarGiveDate);
+                                r.Replace("{$checkPointAddress}", _actObj.PPTOAddress);
+                                r.Replace("{$brandModelAuto}", _actObj.Car.Brand + " " + _actObj.Car.Model);
+                                r.Replace("{$govRegNum}", _actObj.Car.GovRegNum);
+                                r.Replace("{$VIN}", _actObj.Car.VIN);
+                                r.Replace("{$modelNumberEngine}", _actObj.Car.Engine.Model + " " + _actObj.Car.Engine.Number);
+                                r.Replace("{$color}", _actObj.Car.Color);
+                                r.Replace("{$engineType}", _actObj.Car.Engine.Type);
+                                r.Replace("{$fuel}", _actObj.Car.Engine.Fuel);
                             }
                         }
                     }
@@ -131,7 +110,6 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments
         {
             _outStream.Close();
             _outStream.Dispose();
-            //PathToAnswerDoc = Path.GetFullPath("ServerApp/Config/Docs/Acts/");
         }
     }
 }
