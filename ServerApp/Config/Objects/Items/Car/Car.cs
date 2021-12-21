@@ -1,4 +1,6 @@
+using LBTDTools.ServerApp.Config.Objects.Items.Car;
 using LBTDTools.ServerApp.Config.Objects.Items.Car.Parts;
+using LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades;
 
 namespace LBTDTools.ServerApp.Config.Objects.Items.Car
 {

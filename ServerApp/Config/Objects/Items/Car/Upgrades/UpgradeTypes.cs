@@ -1,4 +1,4 @@
-namespace LBTDTools.ServerApp.Config.Objects.Items.Car
+namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades
 {
     public class UpgradeTypes
     {
