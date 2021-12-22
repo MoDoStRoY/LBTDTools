@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using LBTDTools.ServerApp.Config.Objects.Docs;
 using LBTDTools.ServerApp.Scripts.CreateDocuments;
+using LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LBTDTools.Controllers
@@ -10,18 +11,18 @@ namespace LBTDTools.Controllers
     public class CreateDocsController : Controller
     {
         [NotNull]
-        private IDocAct docAct;
+        private IActMain actMain;
 
-        public CreateDocsController([NotNull] IDocAct act)
+        public CreateDocsController([NotNull] IActMain act)
         {
-            docAct = act;
+            actMain = act;
         }
         
         [HttpPost]
         [Route("GetAct")]
         public PhysicalFileResult GetAct([FromBody] Act act)
         {
-            string[] buffer = docAct.CreateAct(act).Split(';');
+            string[] buffer = actMain.CreateAct(act).Split(';');
             return PhysicalFile(buffer[0], buffer[1], buffer[2]);
         }
     }

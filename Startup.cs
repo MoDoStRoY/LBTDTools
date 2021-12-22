@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LBTDTools.ServerApp.Scripts.CreateDocuments;
+using LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,7 @@ namespace LBTDTools
         {
             #region MVC
 
-            s.AddSingleton<IDocAct, DocAct>();
+            s.AddSingleton<IActMain, ActMain>();
             
             s.AddMvc(o =>
                 {

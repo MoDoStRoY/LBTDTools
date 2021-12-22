@@ -1,3 +1,6 @@
+using System;
+using LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties;
+
 namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades
 {
     public class UpgradeTypes
@@ -42,18 +45,61 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades
         
         public bool ArmorDelete { get; set; } // Снятие брони
 
-        public string PowerBumperFrontText = "Передний силовой бампер";
-
-        public string GetUpgradesList()
+        public string GetUpgradeNames()
         {
             string result = " ";
 
-            if (PowerBumperFront)
-            {
-                result += PowerBumperFrontText;
-            }
+            if (PowerBumperFront) { result += ", " +  UpgradeNames.PowerBumperFrontName; }
+            if (JennyFront) { result += ", " + UpgradeNames.JennyFrontName; }
+            if (ProtectiveArcFront) { result += ", " + UpgradeNames.ProtectiveArcFrontName; }
+            if (Vizor) { result += ", " + UpgradeNames.VizorName; }
+            if (Steps) { result += ", " + UpgradeNames.StepsName; }
+            if (PowerBumperBack) { result += ", " + UpgradeNames.PowerBumperBackName; }
+            if (JennyBack) { result += ", " + UpgradeNames.JennyBackName; }
+            if (ProtectiveArcBack) { result += ", " + UpgradeNames.ProtectiveArcBackName; }
+            if (WheelBracket) { result += ", " + UpgradeNames.WheelBracketName; }
+            if (WheelBracketDoor) { result += ", " + UpgradeNames.WheelBracketDoorName; }
+            if (Kung) { result += ", " + UpgradeNames.KungName; }
+            if (Carrier) { result += ", " + UpgradeNames.CarrierName; }
+            if (Ladder) { result += ", " + UpgradeNames.LadderName; }
+            if (Manhole) { result += ", " + UpgradeNames.ManholeName; }
+            if (MetalRoof) { result += ", " + UpgradeNames.MetalRoofName; }
+            if (FarLights) { result += ", " + UpgradeNames.FarLightsName; }
+            if (DayLights) { result += ", " + UpgradeNames.DayLightsName; }
+            if (FogLights) { result += ", " + UpgradeNames.FogLightsName; }
+            if (WorkLights) { result += ", " + UpgradeNames.WorkLightsName; }
+            if (Snorkel) { result += ", " + UpgradeNames.SnorkelName; }
+            if (EngineProtection) { result += ", " + UpgradeNames.EngineProtectionName; }
+            if (PullProtection) { result += ", " + UpgradeNames.PullProtectionName; }
+            if (TransmissionProtection) { result += ", " + UpgradeNames.TransmissionProtectionName; }
+            if (DiskBrakesFront) { result += ", " + UpgradeNames.DiskBrakesFrontName; }
+            if (DiskBrakesBack) { result += ", " + UpgradeNames.DiskBrakesBackName; }
+            if (Damper) { result += ", " + UpgradeNames.DamperName; }
+            if (WaterBooster) { result += ", " + UpgradeNames.WaterBoosterName; }
+            if (SleepingBag) { result += ", " + UpgradeNames.SleepingBagName; }
+            if (LiftSpring) { result += ", " + UpgradeNames.LiftSpringName; }
+            if (LiftSpacers) { result += ", " + UpgradeNames.LiftSpacersName; }
+            if (BiggerTires) { result += ", " + UpgradeNames.BiggerTiresName; }
+            if (ArchExtenders) { result += ", " + UpgradeNames.ArchExtendersName; }
+            if (GasSet) { result += ", " + UpgradeNames.GasSetName; }
+            if (GasDelete) { result += ", " + UpgradeNames.GasDeleteName; }
+            if (SwapEngine) { result += ", " + UpgradeNames.SwapEngineName; }
+            if (SwapCategory) { result += ", " + UpgradeNames.SwapCategoryName; }
+            if (ArmorDelete) { result += ", " + UpgradeNames.ArmorDeleteName; }
 
-            return result.Trim();
+            return CorrectNamesList(result).Trim();
+        }
+
+        private string CorrectNamesList(string incorrectString)
+        {
+            char[] buffer = incorrectString.ToLower().ToCharArray();
+
+            for (int i = 0; i < 2; i++)
+                buffer[i] = ' ';
+
+            buffer[3] = Char.ToUpper(buffer[3]);
+
+            return (new string(buffer) + ".").Trim();
         }
     }
 }

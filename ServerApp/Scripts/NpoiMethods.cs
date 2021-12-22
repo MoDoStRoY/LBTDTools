@@ -11,5 +11,14 @@ namespace LBTDTools.ServerApp.Scripts
                 r.SetText(r.GetText(0).Replace(oldString, newString), 0);
             }
         }
+
+        public static bool Contains(this XWPFRun r, string requireString)
+        {
+            if (!string.IsNullOrEmpty(r.GetText(0)) && r.GetText(0).Contains(requireString))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
