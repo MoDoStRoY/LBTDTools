@@ -145,14 +145,6 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
                             p.Replace("{$6Equipment}", actMain._actObj.SafeControl.Equipment);
                             p.Replace("{$6ControledRequire}", actMain._actObj.SafeControl.ControledRequire);
                             p.Replace("{$6ControlResult}", actMain._actObj.SafeControl.ControlResult);
-
-                            if (p.Contains("{$1N}") || p.Contains("{$2N}") ||
-                                p.Contains("{$3N}") || p.Contains("{$4N}") ||
-                                p.Contains("{$5N}") || p.Contains("{$6N}"))
-                            {
-                                p.Replace(p.Text, counterOfControls.ToString());
-                                counterOfControls++;
-                            }
                         }
                     }
                 }
@@ -168,6 +160,24 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
             {
                 actMain._sampleDoc.Tables[tableRowDeleteIndex].RemoveRow(rowDeleteIndex2 - 2);
                 actMain._sampleDoc.Tables[tableRowDeleteIndex].RemoveRow(rowDeleteIndex2 - 2);
+            }
+
+            foreach (XWPFTable tbl in actMain._sampleDoc.Tables)
+            {
+                foreach (XWPFTableRow row in tbl.Rows)
+                {
+                    foreach (XWPFTableCell cell in row.GetTableCells())
+                    {
+                        foreach (XWPFParagraph p in cell.Paragraphs)
+                            if (p.Contains("{$1N}") || p.Contains("{$2N}") ||
+                                p.Contains("{$3N}") || p.Contains("{$4N}") ||
+                                p.Contains("{$5N}") || p.Contains("{$6N}"))
+                            {
+                                p.Replace(p.Text, counterOfControls.ToString());
+                                counterOfControls++;
+                            }
+                    }
+                }
             }
         }
     }
