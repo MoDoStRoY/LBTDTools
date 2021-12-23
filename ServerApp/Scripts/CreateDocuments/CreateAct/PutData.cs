@@ -95,20 +95,10 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
                             p.Replace("{$2ControledRequire}", actMain._actObj.WeightControl.ControledRequire);
                             p.Replace("{$2ControlResult}", actMain._actObj.WeightControl.ControlResult);
 
-                            p.Replace("{$1StandartName}", actMain._actObj.VisualControl.StandartName);
-                            p.Replace("{$1Equipment}", actMain._actObj.VisualControl.Equipment);
-                            p.Replace("{$1ControledRequire}", actMain._actObj.VisualControl.ControledRequire);
-                            p.Replace("{$1ControlResult}", actMain._actObj.VisualControl.ControlResult);
-
-                            p.Replace("{$2StandartName}", actMain._actObj.WeightControl.StandartName);
-                            p.Replace("{$2Equipment}", actMain._actObj.WeightControl.Equipment);
-                            p.Replace("{$2ControledRequire}", actMain._actObj.WeightControl.ControledRequire);
-                            p.Replace("{$2ControlResult}", actMain._actObj.WeightControl.ControlResult);
-
                             if (p.Contains("{$3N}"))
                             {
-                                if (!actMain._actObj.Car.Upgrades.SwapEngine ||
-                                    !actMain._actObj.Car.Upgrades.GasSet ||
+                                if (!actMain._actObj.Car.Upgrades.SwapEngine &&
+                                    !actMain._actObj.Car.Upgrades.GasSet &&
                                     !actMain._actObj.Car.Upgrades.GasDelete)
                                 {
                                     rowDeleteIndex1 = tbl.Rows.IndexOf(row);
@@ -128,7 +118,38 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
 
                             if (p.Contains("{$5N}"))
                             {
-                                if (!actMain._actObj.Car.Upgrades.PowerBumperFront)
+                                if (!actMain._actObj.Car.Upgrades.PowerBumperFront &&
+                                    !actMain._actObj.Car.Upgrades.JennyFront&&
+                                    !actMain._actObj.Car.Upgrades.ProtectiveArcFront &&
+                                    !actMain._actObj.Car.Upgrades.Vizor &&
+                                    !actMain._actObj.Car.Upgrades.Steps &&
+                                    !actMain._actObj.Car.Upgrades.PowerBumperBack &&
+                                    !actMain._actObj.Car.Upgrades.JennyBack &&
+                                    !actMain._actObj.Car.Upgrades.ProtectiveArcBack &&
+                                    !actMain._actObj.Car.Upgrades.WheelBracket &&
+                                    !actMain._actObj.Car.Upgrades.WheelBracketDoor &&
+                                    !actMain._actObj.Car.Upgrades.Kung &&
+                                    !actMain._actObj.Car.Upgrades.Carrier &&
+                                    !actMain._actObj.Car.Upgrades.Ladder &&
+                                    !actMain._actObj.Car.Upgrades.Manhole &&
+                                    !actMain._actObj.Car.Upgrades.MetalRoof &&
+                                    !actMain._actObj.Car.Upgrades.FarLights &&
+                                    !actMain._actObj.Car.Upgrades.DayLights &&
+                                    !actMain._actObj.Car.Upgrades.FogLights &&
+                                    !actMain._actObj.Car.Upgrades.WorkLights &&
+                                    !actMain._actObj.Car.Upgrades.Snorkel &&
+                                    !actMain._actObj.Car.Upgrades.EngineProtection &&
+                                    !actMain._actObj.Car.Upgrades.PullProtection &&
+                                    !actMain._actObj.Car.Upgrades.TransmissionProtection &&
+                                    !actMain._actObj.Car.Upgrades.DiskBrakesFront &&
+                                    !actMain._actObj.Car.Upgrades.DiskBrakesBack &&
+                                    !actMain._actObj.Car.Upgrades.Damper &&
+                                    !actMain._actObj.Car.Upgrades.WaterBooster &&
+                                    !actMain._actObj.Car.Upgrades.SleepingBag &&
+                                    !actMain._actObj.Car.Upgrades.LiftSpring &&
+                                    !actMain._actObj.Car.Upgrades.LiftSpacers &&
+                                    !actMain._actObj.Car.Upgrades.BiggerTires &&
+                                    !actMain._actObj.Car.Upgrades.ArchExtenders)
                                 {
                                     rowDeleteIndex2 = tbl.Rows.IndexOf(row);
                                     tableRowDeleteIndex = actMain._sampleDoc.Tables.IndexOf(tbl);
@@ -158,8 +179,16 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
 
             if (rowDeleteIndex2 != 999)
             {
-                actMain._sampleDoc.Tables[tableRowDeleteIndex].RemoveRow(rowDeleteIndex2 - 2);
-                actMain._sampleDoc.Tables[tableRowDeleteIndex].RemoveRow(rowDeleteIndex2 - 2);
+                if (rowDeleteIndex1 != 999)
+                {
+                    actMain._sampleDoc.Tables[tableRowDeleteIndex].RemoveRow(rowDeleteIndex2 - 2);
+                    actMain._sampleDoc.Tables[tableRowDeleteIndex].RemoveRow(rowDeleteIndex2 - 2);
+                }
+                else
+                {
+                    actMain._sampleDoc.Tables[tableRowDeleteIndex].RemoveRow(rowDeleteIndex2);
+                    actMain._sampleDoc.Tables[tableRowDeleteIndex].RemoveRow(rowDeleteIndex2); 
+                }
             }
 
             foreach (XWPFTable tbl in actMain._sampleDoc.Tables)

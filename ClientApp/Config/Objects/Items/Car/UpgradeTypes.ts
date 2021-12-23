@@ -1,12 +1,12 @@
 export default class UpgradeTypes
 {
-    public powerBumperFront: boolean = true;
-    public jennyFront: boolean = true;
+    public powerBumperFront: boolean = false;
+    public jennyFront: boolean = false;
     public protectiveArcFront: boolean = false;
-    public vizor: boolean = true;
+    public vizor: boolean = false;
     public steps: boolean = false;
-    public powerBumperBack: boolean = true;
-    public jennyBack: boolean = true;
+    public powerBumperBack: boolean = false;
+    public jennyBack: boolean = false;
     public protectiveArcBack: boolean = false;
     public wheelBracket: boolean = false;
     public wheelBracketDoor: boolean = false;
@@ -19,7 +19,7 @@ export default class UpgradeTypes
     public dayLights: boolean = false;
     public fogLights: boolean = false;
     public workLights: boolean = false;
-    public snorkel: boolean = true;
+    public snorkel: boolean = false;
     public engineProtection: boolean = false;
     public pullProtection: boolean = false;
     public transmissionProtection: boolean = false;
@@ -39,4 +39,6 @@ export default class UpgradeTypes
     public swapCategory: boolean = false;
     
     public armorDelete: boolean = false;
+    
+    constructor() {}
 }

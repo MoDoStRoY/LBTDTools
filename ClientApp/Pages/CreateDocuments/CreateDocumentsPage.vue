@@ -285,9 +285,7 @@ import Laboratory from "../../Config/Objects/Items/Laboratory";
 import Service from "../../Config/Objects/Items/Service";
 import Car from "../../Config/Objects/Items/Car/Car";
 import Engine from "../../Config/Objects/Items/Car/Parts/Engine";
-import UpgradeTypes from "../../Config/Objects/Items/Car/UpgradeTypes";
-import axios from "axios";
-import actRequest from "../../Scripts/CreateDocuments/Act";
+import {actRequest, getUpgradesList} from "../../Scripts/CreateDocuments/Act";
 import Client from "../../Config/Objects/Items/Client";
 
 @Component
@@ -467,8 +465,15 @@ export default class CreateDocumentsPage extends Vue {
         new Service(this.nameService, this.entityAddressService, this.certificateDateService, 
         this.certificateNumberService, this.certificateAuthorService), 
         new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar,
-        this.chassisNumberCar, this.bodyNumberCar, new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine),
-        new UpgradeTypes()), new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient), 
+        this.chassisNumberCar, this.bodyNumberCar, new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine), 
+            getUpgradesList(this.powerBumperFront, this.jennyFront, this.protectiveArcFront, this.vizor, this.steps,
+                this.powerBumperBack, this.jennyBack, this.protectiveArcBack, this.wheelBracket, this.wheelBracketDoor,
+                this.kung, this.carrier, this.ladder, this.manhole, this.metalRoof, this.farLights, this.dayLights,
+                this.fogLights, this.workLights, this.snorkel, this.engineProtection, this.pullProtection,
+                this.transmissionProtection, this.diskBrakesFront, this.diskBrakesBack, this.damper, this.waterBooster,
+                this.sleepingBag, this.liftSpring, this.liftSpacers, this.biggerTires, this.archExtenders,
+                this.gasSet, this.gasDelete, this.swapEngine, this.swapCategory, this.armorDelete)), 
+        new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient), 
         this.numberAct, this.sampleCloseDateAct, this.carGiveDateService, this.PPTOAddressAct, this.namePPTOExpertAct);
     
     this.downloadLink = actRequest(act);
