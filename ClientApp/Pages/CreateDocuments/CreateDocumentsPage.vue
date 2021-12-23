@@ -134,7 +134,7 @@
         <div v-if="displayServiceFlag">
           <h1><strong>Данные по производителю работ и датам</strong></h1>
           <b-field label="Производитель работ (с полными ФИО)">
-            <b-input v-model="nameService" placeholder="Например: ИП Васильев Павел Александрович"></b-input>
+            <b-input v-model="nameService" placeholder="Например: ИП Васильев Павел Александрович" value="ИП Свистунов Иван Сергеевич"></b-input>
           </b-field>
           <b-field v-if="docDeclaration" label="Юридический адрес">
             <b-input v-model="entityAddressService" placeholder="Например: Челябинск, ул.Пекинская д.28"></b-input>
@@ -166,7 +166,7 @@
 
           <b-field v-if="docAct" grouped>
             <b-field label="Адрес ППТО" expanded>
-              <b-input v-model="PPTOAddressAct" placeholder="Например: Челябинск, ул.Ленина д.17"></b-input>
+              <b-input v-model="PPTOAddressAct" placeholder="Например: Челябинск, ул.Ленина д.17" value="г.Челябинск, ул. Радонежская, 6"></b-input>
             </b-field>
             <b-field label="ФИО сотрудника ППТО" expanded>
               <b-input v-model="namePPTOExpertAct" placeholder="Например: Ворошилов И.С."></b-input>
@@ -355,15 +355,15 @@ export default class CreateDocumentsPage extends Vue {
   nameLab: string = "";
   finaleNumberLab: string = "";
   
-  nameService: string = "";
+  nameService: string = "ИП Свистунов Иван Сергеевич";
   entityAddressService: string = "";
   certificateDateService: string = "";
   certificateNumberService: string = "";
   certificateAuthorService: string = "";
   sampleCloseDateAct: string = "";
   carGiveDateService: string = "";
-  PPTOAddressAct: string = "";
-  namePPTOExpertAct: string = "";
+  PPTOAddressAct: string = "г.Челябинск, ул. Радонежская, 6";
+  namePPTOExpertAct: string = "Клименков В.П.";
   numberAct: string = "";
   
   brandCar: string = "";
