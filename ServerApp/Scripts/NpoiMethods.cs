@@ -20,5 +20,22 @@ namespace LBTDTools.ServerApp.Scripts
             }
             return false;
         }
+        
+        public static void Replace(this XWPFParagraph p, string oldString, string newString)
+        {
+            if (!string.IsNullOrEmpty(p.Text) && p.Text.Contains(oldString))
+            {
+                p.ReplaceText(p.Text, p.Text.Replace(oldString, newString));
+            }
+        }
+
+        public static bool Contains(this XWPFParagraph p, string requireString)
+        {
+            if (!string.IsNullOrEmpty(p.Text) && p.Text.Contains(requireString))
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
