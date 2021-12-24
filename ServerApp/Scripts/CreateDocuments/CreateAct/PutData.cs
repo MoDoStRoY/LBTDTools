@@ -1,5 +1,6 @@
 using System;
 using LBTDTools.ServerApp.Config.Objects.Docs;
+using LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties;
 using NPOI.XWPF.UserModel;
 
 namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
@@ -14,7 +15,7 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
 
         private static void PutParagraph(ActMain actMain)
         {
-            foreach (var para in actMain._sampleDoc.Paragraphs)
+            foreach (var para in actMain.SampleDoc.Paragraphs)
             {
                 string oldText = para.ParagraphText;
 
@@ -67,9 +68,9 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
                 {"{$equipment}", actMain._actObj.Car.Upgrades.GetUpgradeNames()}
             };
 
-            actMain._sampleDoc.Tables[0].ParseReplace(firstTableMassive);
-            actMain._sampleDoc.Tables[1].ParseReplace(secondTableMassive);
-            actMain._sampleDoc.Tables[2].ParseReplace(thirdTableMassive);
+            actMain.SampleDoc.Tables[0].ParseReplace(firstTableMassive);
+            actMain.SampleDoc.Tables[1].ParseReplace(secondTableMassive);
+            actMain.SampleDoc.Tables[2].ParseReplace(thirdTableMassive);
         }
 
         private static void StandartTable(ActMain actMain)
@@ -107,76 +108,46 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
                 {"{$6ControlResult}", actMain._actObj.SafeControl.ControlResult}
             };
 
-            actMain._sampleDoc.Tables[3].ParseReplace(fourTableMassive);
+            actMain.SampleDoc.Tables[3].ParseReplace(fourTableMassive);
 
-            bool deleteCoSoundRows = false;
-            bool deleteDimensionsSafeRows = false;
+            bool needCoSoundRows = false;
+            bool needDimensionsSafeRows = false;
             int counterOfControls = 1;
-
-            if (!actMain._actObj.Car.Upgrades.SwapEngine &&
-                !actMain._actObj.Car.Upgrades.GasSet &&
-                !actMain._actObj.Car.Upgrades.GasDelete)
+            
+            for (int i = 0; i < actMain._actObj.Car.Upgrades.ListOfActiveUpgrades.Count; i++)
             {
-                deleteCoSoundRows = true;
-            }
-
-            if (!actMain._actObj.Car.Upgrades.PowerBumperFront &&
-                !actMain._actObj.Car.Upgrades.JennyFront &&
-                !actMain._actObj.Car.Upgrades.ProtectiveArcFront &&
-                !actMain._actObj.Car.Upgrades.Vizor &&
-                !actMain._actObj.Car.Upgrades.Steps &&
-                !actMain._actObj.Car.Upgrades.PowerBumperBack &&
-                !actMain._actObj.Car.Upgrades.JennyBack &&
-                !actMain._actObj.Car.Upgrades.ProtectiveArcBack &&
-                !actMain._actObj.Car.Upgrades.WheelBracket &&
-                !actMain._actObj.Car.Upgrades.WheelBracketDoor &&
-                !actMain._actObj.Car.Upgrades.Kung &&
-                !actMain._actObj.Car.Upgrades.Carrier &&
-                !actMain._actObj.Car.Upgrades.Ladder &&
-                !actMain._actObj.Car.Upgrades.Manhole &&
-                !actMain._actObj.Car.Upgrades.MetalRoof &&
-                !actMain._actObj.Car.Upgrades.FarLights &&
-                !actMain._actObj.Car.Upgrades.DayLights &&
-                !actMain._actObj.Car.Upgrades.FogLights &&
-                !actMain._actObj.Car.Upgrades.WorkLights &&
-                !actMain._actObj.Car.Upgrades.Snorkel &&
-                !actMain._actObj.Car.Upgrades.EngineProtection &&
-                !actMain._actObj.Car.Upgrades.PullProtection &&
-                !actMain._actObj.Car.Upgrades.TransmissionProtection &&
-                !actMain._actObj.Car.Upgrades.DiskBrakesFront &&
-                !actMain._actObj.Car.Upgrades.DiskBrakesBack &&
-                !actMain._actObj.Car.Upgrades.Damper &&
-                !actMain._actObj.Car.Upgrades.WaterBooster &&
-                !actMain._actObj.Car.Upgrades.SleepingBag &&
-                !actMain._actObj.Car.Upgrades.LiftSpring &&
-                !actMain._actObj.Car.Upgrades.LiftSpacers &&
-                !actMain._actObj.Car.Upgrades.BiggerTires &&
-                !actMain._actObj.Car.Upgrades.ArchExtenders)
-            {
-                deleteDimensionsSafeRows = true;
-            }
-
-            if (deleteCoSoundRows)
-            {
-                actMain._sampleDoc.Tables[3].RemoveRow(3);
-                actMain._sampleDoc.Tables[3].RemoveRow(3);
-            }
-
-            if (deleteDimensionsSafeRows)
-            {
-                if (deleteCoSoundRows)
+                switch (actMain._actObj.Car.Upgrades.ListOfActiveUpgrades[i].CheckGet())
                 {
-                    actMain._sampleDoc.Tables[3].RemoveRow(3);
-                    actMain._sampleDoc.Tables[3].RemoveRow(3);
+                    case ECheck.COSOUND:
+                        needCoSoundRows = true;
+                        break;
+                    case ECheck.DIMENSIONSSAFE:
+                        needDimensionsSafeRows = true;
+                        break;
+                }
+            }
+
+            if (!needCoSoundRows)
+            {
+                actMain.SampleDoc.Tables[3].RemoveRow(3);
+                actMain.SampleDoc.Tables[3].RemoveRow(3);
+            }
+
+            if (!needDimensionsSafeRows)
+            {
+                if (!needCoSoundRows)
+                {
+                    actMain.SampleDoc.Tables[3].RemoveRow(3);
+                    actMain.SampleDoc.Tables[3].RemoveRow(3);
                 }
                 else
                 {
-                    actMain._sampleDoc.Tables[3].RemoveRow(5);
-                    actMain._sampleDoc.Tables[3].RemoveRow(5);
+                    actMain.SampleDoc.Tables[3].RemoveRow(5);
+                    actMain.SampleDoc.Tables[3].RemoveRow(5);
                 }
             }
 
-            foreach (XWPFTable tbl in actMain._sampleDoc.Tables)
+            foreach (XWPFTable tbl in actMain.SampleDoc.Tables)
             {
                 foreach (XWPFTableRow row in tbl.Rows)
                 {

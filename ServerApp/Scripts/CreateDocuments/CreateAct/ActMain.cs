@@ -13,9 +13,9 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
 
     public class ActMain : IActMain
     {
-        private readonly ActProps Props = new();
+        private readonly ActProps _props = new();
         private string _pathToAnswerDoc;
-        public XWPFDocument _sampleDoc;
+        public XWPFDocument SampleDoc;
         private FileStream _outStream;
         public Act _actObj;
 
@@ -26,17 +26,18 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
             ReadSample();
             CorrectPathToAnswerDoc();
             CreateBufferFile();
+            actObjIn.Car.Upgrades.InitializeListOfUpgrades();
             this.Put();
             WriteData();
             CloseStreams();
 
-            return _pathToAnswerDoc + ";" + Props.TypeOfAnswerDoc + ";" + Props.NameOfAnswerDoc;
+            return _pathToAnswerDoc + ";" + _props.TypeOfAnswerDoc + ";" + _props.NameOfAnswerDoc;
         }
 
         private void ReadSample()
         {
-            FileStream inStream = new FileStream(Props.PathToSample, FileMode.Open, FileAccess.Read);
-            _sampleDoc = new XWPFDocument(inStream);
+            FileStream inStream = new FileStream(_props.PathToSample, FileMode.Open, FileAccess.Read);
+            SampleDoc = new XWPFDocument(inStream);
             inStream.Close();
             inStream.Dispose();
         }
@@ -44,7 +45,7 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
         private void CorrectPathToAnswerDoc()
         {
             Program.Server.DocActCounter++;
-            _pathToAnswerDoc = Props.PathToAnswerDoc + "Act_" + Program.Server.DocActCounter + ".docx";
+            _pathToAnswerDoc = _props.PathToAnswerDoc + "Act_" + Program.Server.DocActCounter + ".docx";
         }
 
         private void CreateBufferFile()
@@ -55,7 +56,7 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
         private void WriteData()
         {
             _outStream = new FileStream(_pathToAnswerDoc, FileMode.Create);
-            _sampleDoc.Write(_outStream);
+            SampleDoc.Write(_outStream);
         }
 
         private void CloseStreams()
