@@ -33,7 +33,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades
         
         public void InitializeListOfUpgrades()
         {
-            for (int i = 0; i < UpgradesBoolList.Count-2; i++)
+            for (int i = 0; i < UpgradesBoolList.Count; i++)
             {
                 ListOfUpgrades[i].Done = UpgradesBoolList[i];
             }
@@ -43,7 +43,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades
 
         public void SortList()
         {
-            for (int i = 0; i < ListOfUpgrades.Count-1; i++)
+            for (int i = 0; i < ListOfUpgrades.Count; i++)
             {
                 switch (ListOfUpgrades[i].CategoryGet())
                 {
