@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace LBTDTools.ServerApp.Config.Docs.Properties
+namespace LBTDTools.ServerApp.Config.Objects.Docs.Properties.Act
 {
     public class ActProps
     {

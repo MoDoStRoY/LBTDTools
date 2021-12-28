@@ -1,27 +1,10 @@
+using System.Collections.Generic;
 using NPOI.XWPF.UserModel;
 
 namespace LBTDTools.ServerApp.Scripts
 {
     public static class NpoiMethods
     {
-        public static void Replace(this XWPFRun r, string oldString, string newString)
-        {
-            if (!string.IsNullOrEmpty(r.GetText(0)) && r.GetText(0).Contains(oldString))
-            {
-                r.SetText(r.GetText(0).Replace(oldString, newString), 0);
-            }
-        }
-
-        public static bool Contains(this XWPFRun r, string requireString)
-        {
-            if (!string.IsNullOrEmpty(r.GetText(0)) && r.GetText(0).Contains(requireString))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         public static void Replace(this XWPFParagraph p, string oldString, string newString)
         {
             if (!string.IsNullOrEmpty(p.Text) && p.Text.Contains(oldString))
@@ -56,20 +39,17 @@ namespace LBTDTools.ServerApp.Scripts
                 }
             }
         }
-
-        public static int ParseContains(this XWPFTable tbl, string requiredString)
-        {
-            foreach (XWPFTableRow row in tbl.Rows)
-            {
-                foreach (XWPFTableCell cell in row.GetTableCells())
+        
+        public static void ParseReplace(this IList<XWPFParagraph> paragraphs, string[,] stringsForReplace)
                 {
-                    foreach (XWPFParagraph p in cell.Paragraphs)
+                    for (int i = 0; i < paragraphs.Count; i++)
                     {
-                        if (p.Contains(requiredString)) return tbl.Rows.IndexOf(row);
+                        if (paragraphs[i].Text == "")
+                            continue;
+
+                        for (int i1 = 0; i1 < stringsForReplace.GetLength(0); i1++)
+                            paragraphs[i].Replace(stringsForReplace[i1, 0], stringsForReplace[i1, 1]);
                     }
                 }
-            }
-            return 999;
-        }
     }
 }
