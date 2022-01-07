@@ -9,7 +9,21 @@ namespace LBTDTools.ServerApp.Scripts
         {
             if (!string.IsNullOrEmpty(p.Text) && p.Text.Contains(oldString))
             {
-                p.ReplaceText(p.Text, p.Text.Replace(oldString, newString));
+                for (int i = 0; i < p.Runs.Count; i++)
+                {
+                    /*if (p.Runs[i].GetText(0).Contains(oldString))
+                    {
+                        p.Runs[i].ReplaceText(oldString, newString);
+                    }
+                    else if (p.Runs[i].GetText(0).Contains("{$") && i <= p.Runs.Count-3)
+                    {
+                        p.Runs[i].ReplaceText(p.Runs[i].GetText(0), "");
+                        p.Runs[i+1].ReplaceText(p.Runs[i+1].GetText(0), newString);
+                        p.Runs[i+2].ReplaceText(p.Runs[i+2].GetText(0), "");
+                    }*/
+                    
+                    p.ReplaceText(oldString, newString);
+                }
             }
         }
 

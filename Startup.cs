@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LBTDTools.ServerApp.Scripts.CreateDocuments;
 using LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct;
+using LBTDTools.ServerApp.Scripts.CreateDocuments.CreateDecrlaration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using ActMain = LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct.ActMain;
 
 #pragma warning disable 618
 
@@ -30,6 +32,7 @@ namespace LBTDTools
             #region MVC
 
             s.AddSingleton<IActMain, ActMain>();
+            s.AddSingleton<IDeclarationMain, DeclarationMain>();
             
             s.AddMvc(o =>
                 {

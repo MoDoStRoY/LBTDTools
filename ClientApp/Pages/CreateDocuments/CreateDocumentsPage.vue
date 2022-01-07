@@ -22,7 +22,7 @@
         </b-field>
       </div>
       
-      <b-button v-on:click="getAct"><strong>ТЕСТОВАЯ КНОПКА</strong></b-button>
+      <b-button v-on:click="getDocument"><strong>ТЕСТОВАЯ КНОПКА</strong></b-button>
       
     </div>
 
@@ -288,6 +288,8 @@ import Engine from "../../Config/Objects/Items/Car/Parts/Engine";
 import {actRequest} from "../../Scripts/CreateDocuments/Act";
 import Client from "../../Config/Objects/Items/Client";
 import UpgradeTypes from "../../Config/Objects/Items/Car/UpgradeTypes";
+import Declaration from "../../Config/Objects/Docs/Declaration";
+import {declarationRequest} from "../../Scripts/CreateDocuments/Declaration";
 
 @Component
 export default class CreateDocumentsPage extends Vue {
@@ -458,6 +460,14 @@ export default class CreateDocumentsPage extends Vue {
           break;
     }
   }
+  
+  getDocument()
+  {
+    if (this.docAct)
+      this.getAct();
+    if (this.docDeclaration)
+      this.getDeclaration();
+  }
 
   async getAct(): Promise<void>
   {
@@ -480,6 +490,25 @@ export default class CreateDocumentsPage extends Vue {
     this.downloadLink = actRequest(act);
   }
     
+  async getDeclaration(): Promise<void>
+  {
+    let declaration = new Declaration(
+        new Laboratory(this.nameLab, this.finaleNumberLab),
+        new Service(this.nameService, this.entityAddressService, this.certificateDateService,
+            this.certificateNumberService, this.certificateAuthorService),
+        new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar,
+            this.chassisNumberCar, this.bodyNumberCar, new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine),
+            new UpgradeTypes([this.powerBumperFront, this.jennyFront, this.protectiveArcFront, this.vizor, this.steps,
+              this.powerBumperBack, this.jennyBack, this.protectiveArcBack, this.wheelBracket, this.wheelBracketDoor,
+              this.kung, this.carrier, this.ladder, this.manhole, this.metalRoof, this.farLights, this.dayLights,
+              this.fogLights, this.workLights, this.snorkel, this.engineProtection, this.pullProtection,
+              this.transmissionProtection, this.diskBrakesFront, this.diskBrakesBack, this.damper, this.waterBooster,
+              this.sleepingBag, this.liftSpring, this.liftSpacers, this.biggerTires, this.archExtenders,
+              this.gasSet, this.gasDelete, this.swapEngine, this.swapCategory, this.armorDelete])),
+        new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient));
+    
+    this.downloadLink = declarationRequest(declaration);
+  }
     
 }
 </script>

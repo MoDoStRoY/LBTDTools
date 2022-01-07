@@ -13,7 +13,7 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateAct
 
     public class ActMain : IActMain
     {
-        private readonly ActProps _props = new();
+        private ActProps _props = new();
         private string _pathToAnswerDoc;
         public XWPFDocument SampleDoc;
         private FileStream _outStream;
