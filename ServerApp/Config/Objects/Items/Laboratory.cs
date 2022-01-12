@@ -4,5 +4,6 @@ namespace LBTDTools.ServerApp.Config.Objects.Items
     {
         public string Name { get; set; }
         public string FinaleNumber { get; set; }
+        public string FinaleDate { get; set; }
     }
 }

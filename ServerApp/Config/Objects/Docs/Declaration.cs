@@ -10,5 +10,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Docs
         public Service Service { get; set; }
         public Car Car { get; set; }
         public Client Client { get; set; }
+        
+        public string WorksDate { get; set; } 
     }
 }

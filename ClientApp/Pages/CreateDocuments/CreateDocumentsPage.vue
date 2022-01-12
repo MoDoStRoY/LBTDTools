@@ -124,6 +124,9 @@
             <b-field label="Номер заключения">
               <b-input v-model="finaleNumberLab" placeholder="Например: ПТЭАП01-38024"></b-input>
             </b-field>
+            <b-field label="Дата выпуска заключения">
+              <b-input v-model="finaleDateLab" placeholder="Например: ПТЭАП01-38024"></b-input>
+            </b-field>
           </b-field>
         </div>
       </div>
@@ -154,7 +157,7 @@
 
           <b-field label="Дата и место проведения" grouped>
             <b-field v-if="docDeclaration" label="Дата выполнения работ" expanded>
-              <b-input placeholder="Например: 12.03.1998"></b-input>
+              <b-input v-model="worksDate" placeholder="Например: 12.03.1998"></b-input>
             </b-field>
             <b-field v-if="docAct" label="Дата проведения замеров" expanded>
               <b-input v-model="sampleCloseDateAct" placeholder="Например: 12.03.1998"></b-input>
@@ -357,12 +360,14 @@ export default class CreateDocumentsPage extends Vue {
 
   nameLab: string = "";
   finaleNumberLab: string = "";
+  finaleDateLab: string = "";
   
   nameService: string = "ИП Свистунов Иван Сергеевич";
   entityAddressService: string = "";
   certificateDateService: string = "";
   certificateNumberService: string = "";
   certificateAuthorService: string = "";
+  worksDate: string = "";
   sampleCloseDateAct: string = "";
   carGiveDateService: string = "";
   PPTOAddressAct: string = "г.Челябинск, ул. Радонежская, 6";
@@ -472,7 +477,7 @@ export default class CreateDocumentsPage extends Vue {
   async getAct(): Promise<void>
   {
     let act = new Act(
-        new Laboratory(this.nameLab, this.finaleNumberLab), 
+        new Laboratory(this.nameLab, this.finaleNumberLab, this.finaleDateLab), 
         new Service(this.nameService, this.entityAddressService, this.certificateDateService, 
         this.certificateNumberService, this.certificateAuthorService), 
         new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar,
@@ -493,7 +498,7 @@ export default class CreateDocumentsPage extends Vue {
   async getDeclaration(): Promise<void>
   {
     let declaration = new Declaration(
-        new Laboratory(this.nameLab, this.finaleNumberLab),
+        new Laboratory(this.nameLab, this.finaleNumberLab, this.finaleDateLab),
         new Service(this.nameService, this.entityAddressService, this.certificateDateService,
             this.certificateNumberService, this.certificateAuthorService),
         new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar,
@@ -505,7 +510,7 @@ export default class CreateDocumentsPage extends Vue {
               this.transmissionProtection, this.diskBrakesFront, this.diskBrakesBack, this.damper, this.waterBooster,
               this.sleepingBag, this.liftSpring, this.liftSpacers, this.biggerTires, this.archExtenders,
               this.gasSet, this.gasDelete, this.swapEngine, this.swapCategory, this.armorDelete])),
-        new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient));
+        new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient), this.worksDate);
     
     this.downloadLink = declarationRequest(declaration);
   }

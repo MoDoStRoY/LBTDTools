@@ -128,6 +128,10 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateDecrlaration
                 {"{$certificateDateService}", _declarationObj.Service.CertificateDate},
                 {"{$certificateNumberService}", _declarationObj.Service.CertificateNumber},
                 {"{$certificateAuthorService}", _declarationObj.Service.CertificateAuthor},
+                {"{$finaleNumber}", _declarationObj.Laboratory.FinaleNumber},
+                {"{$finaleDate}", _declarationObj.Laboratory.FinaleDate},
+                {"{$laboratoryName}", _declarationObj.Laboratory.Name},
+                {"{$worksDate}", _declarationObj.WorksDate}
             };
             
             firstTableMassive = new [,] 
