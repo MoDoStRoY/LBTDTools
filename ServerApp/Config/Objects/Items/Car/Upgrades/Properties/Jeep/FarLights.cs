@@ -4,6 +4,8 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Jeep
     {
         public bool Done { get; set; }
         public string Name = "Фары дальнего света";
+        public string UpgradeDesk = "На переднем бампере установлены фары дальнего света.";
+        public string CheckUpgradeDesk = "Подключены к штатной электропроводке автомобиля, установлены на транспортном средстве симметрично средней продольной плоскости.";
 
         public ECategory Category = ECategory.JEEP;
         public ECheck Check = ECheck.DIMENSIONSSAFE;

@@ -4,6 +4,8 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Jeep
     {
         public bool Done { get; set; }
         public string Name = "Пороги";
+        public string UpgradeDesk = "Установлены пороги.";
+        public string CheckUpgradeDesk = "Пороги не имеют травмоопасных выступов, ни одна выступающая часть наружной поверхности не имеет радиус скругления менее 2,5 мм. Пороги надежно закреплены с помощью стандартных крепёжных элементов.";
 
         public ECategory Category = ECategory.JEEP;
         public ECheck Check = ECheck.DIMENSIONSSAFE;
