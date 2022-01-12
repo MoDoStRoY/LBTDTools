@@ -62,7 +62,7 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateDecrlaration
 
             for (int i = 0; i < _declarationObj.Car.Upgrades.ListOfActiveUpgrades.Count; i++)
             {
-                switch (_declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].CheckGet())
+                switch (_declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].GetCheck())
                 {
                     case ECheck.COSOUND:
                         needCoSoundRows = true;

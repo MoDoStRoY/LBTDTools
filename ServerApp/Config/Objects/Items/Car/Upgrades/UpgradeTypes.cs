@@ -45,7 +45,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades
         {
             for (int i = 0; i < ListOfUpgrades.Count; i++)
             {
-                switch (ListOfUpgrades[i].CategoryGet())
+                switch (ListOfUpgrades[i].GetCategory())
                 {
                     case ECategory.JEEP:
                         if (ListOfUpgrades[i].Done)
@@ -77,7 +77,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades
             string result = " ";
 
             for (int i = 0; i < ListOfActiveUpgrades.Count; i++)
-                result += ", " + ListOfActiveUpgrades[i].NameGet();
+                result += ", " + ListOfActiveUpgrades[i].GetName();
 
             return CorrectNamesList(result).Trim();
         }

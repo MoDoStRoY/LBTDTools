@@ -10,18 +10,28 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties
         public const ECategory Category = ECategory.JEEP;
         public const ECheck Check = ECheck.DIMENSIONSSAFE;
         
-        public string NameGet()
+        public string GetName()
         {
             return Name;
         }
         
-        public ECategory CategoryGet()
+        public ECategory GetCategory()
         {
             return Category;
         }
-        public ECheck CheckGet()
+        public ECheck GetCheck()
         {
             return Check;
+        }
+
+        public string GetUpgradeDesk()
+        {
+            return UpgradeDesk;
+        }
+
+        public string GetCheckUpgradeDesk()
+        {
+            return CheckUpgradeDesk;
         }
     }
 }
