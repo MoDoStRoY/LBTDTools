@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div id='app-root' :key="key">
     <HatBar></HatBar>
     <router-view class="pt-2"></router-view>

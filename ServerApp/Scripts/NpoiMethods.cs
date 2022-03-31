@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using NPOI.XWPF.UserModel;
 
 namespace LBTDTools.ServerApp.Scripts
@@ -11,17 +12,20 @@ namespace LBTDTools.ServerApp.Scripts
             {
                 for (int i = 0; i < p.Runs.Count; i++)
                 {
-                    /*if (p.Runs[i].GetText(0).Contains(oldString))
-                    {
-                        p.Runs[i].ReplaceText(oldString, newString);
-                    }
-                    else if (p.Runs[i].GetText(0).Contains("{$") && i <= p.Runs.Count-3)
-                    {
-                        p.Runs[i].ReplaceText(p.Runs[i].GetText(0), "");
-                        p.Runs[i+1].ReplaceText(p.Runs[i+1].GetText(0), newString);
-                        p.Runs[i+2].ReplaceText(p.Runs[i+2].GetText(0), "");
-                    }*/
-                    
+                    p.ReplaceText(oldString, newString);
+                }
+            }
+        }
+        
+        public static void ReplaceWrap(this XWPFParagraph p, string oldString, string newString)
+        {
+            if (!string.IsNullOrEmpty(p.Text) && p.Text.Contains(oldString))
+            {
+                for (int i = 0; i < p.Runs.Count; i++)
+                {
+                    p.Runs[p.Runs.Count - 1].AddBreak(BreakClear.ALL);
+                    p.Runs[p.Runs.Count - 1].AddBreak(BreakClear.ALL);
+                    p.Runs[p.Runs.Count - 1].InsertText(oldString, p.Runs[p.Runs.Count-1].Text.Length-1);
                     p.ReplaceText(oldString, newString);
                 }
             }
@@ -55,15 +59,37 @@ namespace LBTDTools.ServerApp.Scripts
         }
         
         public static void ParseReplace(this IList<XWPFParagraph> paragraphs, string[,] stringsForReplace)
-                {
-                    for (int i = 0; i < paragraphs.Count; i++)
-                    {
-                        if (paragraphs[i].Text == "")
-                            continue;
+        {
+            for (int i = 0; i < paragraphs.Count; i++)
+            {
+                if (paragraphs[i].Text == "")
+                    continue;
 
-                        for (int i1 = 0; i1 < stringsForReplace.GetLength(0); i1++)
-                            paragraphs[i].Replace(stringsForReplace[i1, 0], stringsForReplace[i1, 1]);
-                    }
+                for (int i1 = 0; i1 < stringsForReplace.GetLength(0); i1++)
+                {
+                    paragraphs[i].Replace(stringsForReplace[i1, 0], stringsForReplace[i1, 1]);
                 }
+            }
+        }
+
+        public static void ParseReplaceWrap(this IList<XWPFParagraph> paragraphs, string[,] stringsForReplace)
+        {
+            for (int i = 0; i < paragraphs.Count; i++)
+            {
+                if (paragraphs[i].Text == "")
+                    continue;
+
+                for (int i1 = 0; i1 <= stringsForReplace.GetLength(0); i1++)
+                {
+                    if (i1 == stringsForReplace.GetLength(0))
+                    {
+                        paragraphs[i].ReplaceWrap(stringsForReplace[i1-1, 0], "");
+                        break;
+                    }
+
+                    paragraphs[i].ReplaceWrap(stringsForReplace[i1, 0], stringsForReplace[i1, 1]);
+                }
+            } 
+        }
     }
 }

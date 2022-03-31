@@ -30,9 +30,9 @@ namespace LBTDTools.Controllers
         
         [HttpPost]
         [Route("GetDeclaration")]
-        public PhysicalFileResult GetAct([FromBody] Declaration declaration)
+        public PhysicalFileResult GetDeclaration([FromBody] Declaration declaration)
         {
-            string[] buffer = declarationMain.CreateAct(declaration).Split(';');
+            string[] buffer = declarationMain.CreateDeclaration(declaration).Split(';');
             return PhysicalFile(buffer[0], buffer[1], buffer[2]);
         }
     }

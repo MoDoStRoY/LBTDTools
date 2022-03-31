@@ -8,7 +8,7 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateDecrlaration
 {
     public interface IDeclarationMain
     {
-        public string CreateAct(Declaration declaration);
+        public string CreateDeclaration(Declaration declaration);
     }
 
     public class DeclarationMain : IDeclarationMain
@@ -21,12 +21,9 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateDecrlaration
 
         private string[,] paragraphsMassive;
 
-        private string[,] firstTableMassive;
-        private string[,] secondTableMassive;
-        private string[,] thirdTableMassive;
-        private string[,] fourTableMassive;
+        private string[,] upgradesDeskMassive;
 
-        public string CreateAct(Declaration declarationObj)
+        public string CreateDeclaration(Declaration declarationObj)
         {
             _declarationObj = declarationObj;
             SampleDoc = CreateMain.ReadSample(_props.PathToSample);
@@ -38,81 +35,12 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateDecrlaration
             InitializeStringsForReplace();
 
             PutData();
-            //RemoveUselessRows();
-            //NumberingRows();
 
             CreateMain.WriteData(_pathToAnswerDoc, SampleDoc);
 
             return _pathToAnswerDoc + ";" + _props.TypeOfAnswerDoc + ";" + _props.NameOfAnswerDoc;
         }
-
-        private void PutData()
-        {
-            SampleDoc.Paragraphs.ParseReplace(paragraphsMassive);
-            //SampleDoc.Tables[0].ParseReplace(firstTableMassive);
-            //SampleDoc.Tables[1].ParseReplace(secondTableMassive);
-            //SampleDoc.Tables[2].ParseReplace(thirdTableMassive);
-            //SampleDoc.Tables[3].ParseReplace(fourTableMassive);
-        }
-
-        private void RemoveUselessRows()
-        {
-            bool needCoSoundRows = false;
-            bool needDimensionsSafeRows = false;
-
-            for (int i = 0; i < _declarationObj.Car.Upgrades.ListOfActiveUpgrades.Count; i++)
-            {
-                switch (_declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].GetCheck())
-                {
-                    case ECheck.COSOUND:
-                        needCoSoundRows = true;
-                        break;
-                    case ECheck.DIMENSIONSSAFE:
-                        needDimensionsSafeRows = true;
-                        break;
-                }
-            }
-
-            if (!needCoSoundRows)
-            {
-                //SampleDoc.Tables[3].RemoveRow(3);
-                //SampleDoc.Tables[3].RemoveRow(3);
-            }
-
-            if (!needDimensionsSafeRows)
-            {
-                if (!needCoSoundRows)
-                {
-                    //SampleDoc.Tables[3].RemoveRow(3);
-                    //SampleDoc.Tables[3].RemoveRow(3);
-                }
-                else
-                {
-                    //SampleDoc.Tables[3].RemoveRow(5);
-                    //SampleDoc.Tables[3].RemoveRow(5);
-                }
-            }
-        }
-
-        private void NumberingRows()
-        {
-            int counterOfControls = 1;
-            foreach (XWPFTableRow row in SampleDoc.Tables[2].Rows)
-            {
-                foreach (XWPFTableCell cell in row.GetTableCells())
-                {
-                    foreach (XWPFParagraph p in cell.Paragraphs)
-                        if (p.Contains("{$1N}") || p.Contains("{$2N}") ||
-                            p.Contains("{$3N}") || p.Contains("{$4N}") ||
-                            p.Contains("{$5N}") || p.Contains("{$6N}"))
-                        {
-                            p.Replace(p.Text, counterOfControls.ToString());
-                            counterOfControls++;
-                        }
-                }
-            }
-        }
-
+        
         private void InitializeStringsForReplace()
         {
             paragraphsMassive = new[,]
@@ -133,26 +61,21 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateDecrlaration
                 {"{$laboratoryName}", _declarationObj.Laboratory.Name},
                 {"{$worksDate}", _declarationObj.WorksDate}
             };
-            
-            firstTableMassive = new [,] 
-            {
-                {"{$expertFinaleNumber}", _declarationObj.Laboratory.FinaleNumber},
-            };
 
-            secondTableMassive = new [,]
+            string bufferStringOfUpgradesDesk = "";
+            for (int i = 0; i < _declarationObj.Car.Upgrades.ListOfActiveUpgrades.Count; i++)
             {
-                {"{$brandModelAuto}", _declarationObj.Car.GetFullName()},
-            };
+                bufferStringOfUpgradesDesk += _declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].GetName() + "\r\n" +
+                                              _declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].GetUpgradeDesk() +
+                                              "\r\n\r\n";
+            }
+            upgradesDeskMassive = new[,]{{"{$upgradesList}", bufferStringOfUpgradesDesk}};
+        }
 
-            thirdTableMassive = new [,]
-            {
-                {"{$modelNumberEngine}", _declarationObj.Car.Engine.GetFullName()},
-            };
-            
-            fourTableMassive = new[,]
-            {
-                {"{$1StandartName}", _declarationObj.Car.Model},
-            };
+        private void PutData()
+        {
+            SampleDoc.Paragraphs.ParseReplace(paragraphsMassive);
+            SampleDoc.Paragraphs.ParseReplaceWrap(upgradesDeskMassive);
         }
     }
 }
