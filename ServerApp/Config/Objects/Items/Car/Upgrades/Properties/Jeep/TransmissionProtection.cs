@@ -6,6 +6,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Jeep
         public string Name = "Защита коробки передач";
         public string UpgradeDesk = "Установлена защита коробки передач.";
         public string CheckUpgradeDesk = "Закреплена с помощью стандартных крепежных инструментов.";
+        public string Equipment = "";
 
         public ECategory Category = ECategory.JEEP;
         public ECheck Check = ECheck.DIMENSIONSSAFE;
@@ -32,6 +33,11 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Jeep
         public string GetCheckUpgradeDesk()
         {
             return CheckUpgradeDesk;
+        }
+
+        public string GetEquipment()
+        {
+            return Equipment;
         }
     }
 }

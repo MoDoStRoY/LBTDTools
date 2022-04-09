@@ -6,6 +6,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Jeep
         public string Name = "Противотуманные фары";
         public string UpgradeDesk = "На переднем бампере установлены противотуманные фары.";
         public string CheckUpgradeDesk = "Подключены к штатной электропроводке автомобиля, установлены на транспортном средстве симметрично средней продольной плоскости.";
+        public string Equipment = "";
 
         public ECategory Category = ECategory.JEEP;
         public ECheck Check = ECheck.DIMENSIONSSAFE;
@@ -32,6 +33,11 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Jeep
         public string GetCheckUpgradeDesk()
         {
             return CheckUpgradeDesk;
+        }
+
+        public string GetEquipment()
+        {
+            return Equipment;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using LBTDTools.ServerApp.Config.Objects.Docs;
 using LBTDTools.ServerApp.Config.Objects.Docs.Properties.Declaration;
@@ -20,8 +21,10 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateDecrlaration
         public Declaration _declarationObj;
 
         private string[,] paragraphsMassive;
+        private string[,] ttxMassive;
 
-        private string[,] upgradesDeskMassive;
+        private List<string> upgradesDeskList;
+        private List<string> upgradesDeskCheckList;
 
         public string CreateDeclaration(Declaration declarationObj)
         {
@@ -61,21 +64,45 @@ namespace LBTDTools.ServerApp.Scripts.CreateDocuments.CreateDecrlaration
                 {"{$laboratoryName}", _declarationObj.Laboratory.Name},
                 {"{$worksDate}", _declarationObj.WorksDate}
             };
+            
+            ttxMassive = new[,]
+            {
+                //{"{$weightWithEquipment}", _declarationObj.Car.GetFullName()},
+                //{"{$maxWeight}", _declarationObj.ToString()},
+                //{"{$length}", _declarationObj.ToString()},
+                //{"{$width}", _declarationObj.ToString()},
+                //{"{$height}", _declarationObj.ToString()},
+                //{"{$wheelBaseLength}", _declarationObj.ToString()},
+                {"{$modelNumberEngine}", _declarationObj.Car.Engine.GetFullName()},
+                //{"{$ecoClass}", _declarationObj.ToString()},
+                //{"{$cylindersCount}", _declarationObj.ToString()},
+                //{"{$cylindersVolume}", _declarationObj.ToString()},
+                //{"{$compression}", _declarationObj.ToString()},
+                //{"{$maxPower}", _declarationObj.ToString()},
+                //{"{$maxRotateMoment}", _declarationObj.ToString()},
+                {"{$fuel}", _declarationObj.Car.Engine.Fuel},
+                //{"{$supplySystem}", _declarationObj.ToString()},
+                //{"{$wheels}", _declarationObj.ToString()},
+                {"{$equipment}", _declarationObj.Car.Upgrades.GetUpgradeNames()},
+            };
 
-            string bufferStringOfUpgradesDesk = "";
+            upgradesDeskList = new();
+            upgradesDeskCheckList = new();
             for (int i = 0; i < _declarationObj.Car.Upgrades.ListOfActiveUpgrades.Count; i++)
             {
-                bufferStringOfUpgradesDesk += _declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].GetName() + "\r\n" +
-                                              _declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].GetUpgradeDesk() +
-                                              "\r\n\r\n";
+                upgradesDeskList.Add(_declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].GetName() + " - " +
+                                              _declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].GetUpgradeDesk());
+                upgradesDeskCheckList.Add(_declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].GetName() + " - " +
+                                     _declarationObj.Car.Upgrades.ListOfActiveUpgrades[i].GetCheckUpgradeDesk());
             }
-            upgradesDeskMassive = new[,]{{"{$upgradesList}", bufferStringOfUpgradesDesk}};
         }
 
         private void PutData()
         {
             SampleDoc.Paragraphs.ParseReplace(paragraphsMassive);
-            SampleDoc.Paragraphs.ParseReplaceWrap(upgradesDeskMassive);
+            SampleDoc.Tables[0].ParseReplaceWrap("{$upgradesList}", upgradesDeskList);
+            SampleDoc.Tables[1].ParseReplaceWrap("{$checkUpgradesList}", upgradesDeskCheckList);
+            SampleDoc.Tables[2].ParseReplace(ttxMassive);
         }
     }
 }

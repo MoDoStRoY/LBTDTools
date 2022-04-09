@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.UserModel;
 
 namespace LBTDTools.ServerApp.Scripts
@@ -12,20 +12,6 @@ namespace LBTDTools.ServerApp.Scripts
             {
                 for (int i = 0; i < p.Runs.Count; i++)
                 {
-                    p.ReplaceText(oldString, newString);
-                }
-            }
-        }
-        
-        public static void ReplaceWrap(this XWPFParagraph p, string oldString, string newString)
-        {
-            if (!string.IsNullOrEmpty(p.Text) && p.Text.Contains(oldString))
-            {
-                for (int i = 0; i < p.Runs.Count; i++)
-                {
-                    p.Runs[p.Runs.Count - 1].AddBreak(BreakClear.ALL);
-                    p.Runs[p.Runs.Count - 1].AddBreak(BreakClear.ALL);
-                    p.Runs[p.Runs.Count - 1].InsertText(oldString, p.Runs[p.Runs.Count-1].Text.Length-1);
                     p.ReplaceText(oldString, newString);
                 }
             }
@@ -72,24 +58,31 @@ namespace LBTDTools.ServerApp.Scripts
             }
         }
 
-        public static void ParseReplaceWrap(this IList<XWPFParagraph> paragraphs, string[,] stringsForReplace)
+        public static void ParseReplaceWrap(this XWPFTable tbl, string keyWord, List<string> listOfStrings)
         {
-            for (int i = 0; i < paragraphs.Count; i++)
+            for (int i = 0; i < listOfStrings.Count; i++)
             {
-                if (paragraphs[i].Text == "")
-                    continue;
-
-                for (int i1 = 0; i1 <= stringsForReplace.GetLength(0); i1++)
+                foreach (XWPFTableRow row in tbl.Rows)
                 {
-                    if (i1 == stringsForReplace.GetLength(0))
+                    foreach (XWPFTableCell cell in row.GetTableCells())
                     {
-                        paragraphs[i].ReplaceWrap(stringsForReplace[i1-1, 0], "");
-                        break;
+                        foreach (XWPFParagraph p in cell.Paragraphs)
+                        { 
+                            if (!string.IsNullOrEmpty(p.Text) && p.Text.Contains(keyWord))
+                            {
+                                for (int i1 = 0; i1 < p.Runs.Count; i1++)
+                                {
+                                    p.ReplaceText(keyWord, listOfStrings[i]); 
+                                }
+                            }
+                        }
                     }
-
-                    paragraphs[i].ReplaceWrap(stringsForReplace[i1, 0], stringsForReplace[i1, 1]);
                 }
-            } 
+                tbl.AddRow(new XWPFTableRow(new CT_Row(), tbl));
+                tbl.Rows[tbl.NumberOfRows-1].CreateCell().AddParagraph().CreateRun().SetText(keyWord);
+            }
+
+            tbl.RemoveRow(tbl.NumberOfRows - 1);
         }
     }
 }

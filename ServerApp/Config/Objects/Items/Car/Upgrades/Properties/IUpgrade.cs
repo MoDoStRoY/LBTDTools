@@ -6,6 +6,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties
         private const string Name = "";
         private const string UpgradeDesk = "";
         private const string CheckUpgradeDesk = "";
+        private const string Equipment = "";
 
         private const ECategory Category = ECategory.JEEP;
         private const ECheck Check = ECheck.STANDART;
@@ -32,6 +33,11 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties
         public string GetCheckUpgradeDesk()
         {
             return CheckUpgradeDesk;
+        }
+
+        public string GetEquipment()
+        {
+            return Equipment;
         }
     }
 }

@@ -6,6 +6,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Speci
         public string Name = "Снятие брони";
         public string UpgradeDesk = "";
         public string CheckUpgradeDesk = "";
+        public string Equipment = "";
 
         public ECategory Category = ECategory.SPECIAL;
         public ECheck Check = ECheck.STANDART;
@@ -32,6 +33,11 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Speci
         public string GetCheckUpgradeDesk()
         {
             return CheckUpgradeDesk;
+        }
+
+        public string GetEquipment()
+        {
+            return Equipment;
         }
     }
 }

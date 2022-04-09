@@ -6,6 +6,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Jeep
         public string Name = "Передние дисковые тормоза";
         public string UpgradeDesk = "На автомобиле смонтированы передние дисковые тормозные механизмы.";
         public string CheckUpgradeDesk = "При монтаже дисковых тормозных механизмов использованы штатные монтажные элементы, соблюдена герметичность соединения тормозных шлангов, регулятор тормозных сил установлен и настроен таким образом, что обеспечивается необходимая эффективность и распределение тормозных усилий по осям автомобиля. Показатели эффективности тормозной системы и устойчивости транспортного средства соответствуют требованиям (удельная тормозная сила рабочей и стояночной тормозной системы, относительная разность тормозных сил колес оси, усилие на органе управления рабочей и стояночной тормозной системы).";
+        public string Equipment = "";
 
         public ECategory Category = ECategory.JEEP;
         public ECheck Check = ECheck.DIMENSIONSSAFE;
@@ -32,6 +33,11 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Jeep
         public string GetCheckUpgradeDesk()
         {
             return CheckUpgradeDesk;
+        }
+
+        public string GetEquipment()
+        {
+            return Equipment;
         }
     }
 }

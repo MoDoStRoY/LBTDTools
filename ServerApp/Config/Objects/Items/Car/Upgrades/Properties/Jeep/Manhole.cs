@@ -6,6 +6,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Jeep
         public string Name = "Люк в крыше";
         public string UpgradeDesk = "В крыше салона установлен аварийно-вентиляционный люк, который не имеет травмоопасных выступов.";
         public string CheckUpgradeDesk = "Сохранены прочностные свойства крыши. Выполнены требования в отношении внутреннего оборудования ТС.";
+        public string Equipment = "";
 
         public ECategory Category = ECategory.JEEP;
         public ECheck Check = ECheck.DIMENSIONSSAFE;
@@ -32,6 +33,11 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Jeep
         public string GetCheckUpgradeDesk()
         {
             return CheckUpgradeDesk;
+        }
+
+        public string GetEquipment()
+        {
+            return Equipment;
         }
     }
 }

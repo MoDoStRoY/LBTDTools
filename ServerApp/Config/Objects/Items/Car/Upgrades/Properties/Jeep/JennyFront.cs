@@ -6,6 +6,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties
         public string Name = "Лебёдка в переднем бампере";
         public string UpgradeDesk = "На переднем бампере установлена электролебедка.";
         public string CheckUpgradeDesk = "Электролебедка надежно закреплена с помощью стандартных крепежных элементов. Электролебедка не выступает за переднюю поверхность бампера. На ТС предусмотрены места для крепления регистрационных знаков в соответствии с требованиями.";
+        public string Equipment = "";
 
         public ECategory Category = ECategory.JEEP;
         public ECheck Check = ECheck.DIMENSIONSSAFE;
@@ -32,6 +33,11 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties
         public string GetCheckUpgradeDesk()
         {
             return CheckUpgradeDesk;
+        }
+
+        public string GetEquipment()
+        {
+            return Equipment;
         }
     }
 }

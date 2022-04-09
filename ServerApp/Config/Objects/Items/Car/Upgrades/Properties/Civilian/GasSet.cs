@@ -6,6 +6,7 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Civil
         public string Name = "Монтаж ГБО";
         public string UpgradeDesk = "";
         public string CheckUpgradeDesk = "";
+        public string Equipment = "";
 
         public ECategory Category = ECategory.CIVILIAN;
         public ECheck Check = ECheck.COSOUND;
@@ -32,6 +33,11 @@ namespace LBTDTools.ServerApp.Config.Objects.Items.Car.Upgrades.Properties.Civil
         public string GetCheckUpgradeDesk()
         {
             return CheckUpgradeDesk;
+        }
+
+        public string GetEquipment()
+        {
+            return Equipment;
         }
     }
 }
