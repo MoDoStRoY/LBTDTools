@@ -125,7 +125,7 @@
               <b-input v-model="finaleNumberLab" placeholder="Например: ПТЭАП01-38024"></b-input>
             </b-field>
             <b-field label="Дата выпуска заключения">
-              <b-input v-model="finaleDateLab" placeholder="Например: ПТЭАП01-38024"></b-input>
+              <b-input v-model="finaleDateLab" placeholder="Например: 12.03.2022"></b-input>
             </b-field>
           </b-field>
         </div>
@@ -293,6 +293,7 @@ import Client from "../../Config/Objects/Items/Client";
 import UpgradeTypes from "../../Config/Objects/Items/Car/UpgradeTypes";
 import Declaration from "../../Config/Objects/Docs/Declaration";
 import {declarationRequest} from "../../Scripts/CreateDocuments/Declaration";
+import Wheels from "../../Config/Objects/Items/Car/Parts/Wheels";
 
 @Component
 export default class CreateDocumentsPage extends Vue {
@@ -363,10 +364,10 @@ export default class CreateDocumentsPage extends Vue {
   finaleDateLab: string = "";
   
   nameService: string = "ИП Свистунов Иван Сергеевич";
-  entityAddressService: string = "";
-  certificateDateService: string = "";
-  certificateNumberService: string = "";
-  certificateAuthorService: string = "";
+  entityAddressService: string = "Челябинск, ул.Бузулукская д.15";
+  certificateDateService: string = "15.04.2021";
+  certificateNumberService: string = "РОСС RU.319335.04БЮС0";
+  certificateAuthorService: string = "органом по сертификации «Национальный научно-исследовательский институт экологии и сертификации»";
   worksDate: string = "";
   sampleCloseDateAct: string = "";
   carGiveDateService: string = "";
@@ -382,10 +383,26 @@ export default class CreateDocumentsPage extends Vue {
   VINCar: string = "";
   chassisNumberCar: string = "";
   bodyNumberCar: string = "";
+  carMaxWeight: string = ""; 
+  carLength: string = "";
+  carWidth: string = "";
+  carHeight: string = "";
+  wheelBaseLength: string = "";
   modelEngine: string = "";
   numberEngine: string = "";
   typeEngine: string = "";
   fuelEngine: string = "";
+  ecoClass: string = "";
+  cylindersCount: string = "";
+  cylindersVolume: string = "";
+  compression: string = "";
+  maxPower: string = "";
+  maxRotateMoment: string = "";
+  supplySystem: string = "";
+  wheelName: string = "";
+  wheelWidth: string = "";
+  wheelProfileSize: string = "";
+  wheelRadius: string = "";
   weightInspection: string = "";
 
   nameClient: string = "";
@@ -479,16 +496,21 @@ export default class CreateDocumentsPage extends Vue {
     let act = new Act(
         new Laboratory(this.nameLab, this.finaleNumberLab, this.finaleDateLab), 
         new Service(this.nameService, this.entityAddressService, this.certificateDateService, 
-        this.certificateNumberService, this.certificateAuthorService), 
-        new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar,
-        this.chassisNumberCar, this.bodyNumberCar, new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine), 
+            this.certificateNumberService, this.certificateAuthorService), 
+        new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar, 
+            this.chassisNumberCar, this.bodyNumberCar, 
+            new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine, this.ecoClass,
+                this.cylindersCount, this.cylindersVolume, this.compression, this.maxPower, this.maxRotateMoment, 
+                this.supplySystem),
+            new Wheels(this.wheelName, this.wheelWidth, this.wheelProfileSize, this.wheelRadius),
             new UpgradeTypes([this.powerBumperFront, this.jennyFront, this.protectiveArcFront, this.vizor, this.steps,
                 this.powerBumperBack, this.jennyBack, this.protectiveArcBack, this.wheelBracket, this.wheelBracketDoor,
                 this.kung, this.carrier, this.ladder, this.manhole, this.metalRoof, this.farLights, this.dayLights,
                 this.fogLights, this.workLights, this.snorkel, this.engineProtection, this.pullProtection,
                 this.transmissionProtection, this.diskBrakesFront, this.diskBrakesBack, this.damper, this.waterBooster,
                 this.sleepingBag, this.liftSpring, this.liftSpacers, this.biggerTires, this.archExtenders,
-                this.gasSet, this.gasDelete, this.swapEngine, this.swapCategory, this.armorDelete])), 
+                this.gasSet, this.gasDelete, this.swapEngine, this.swapCategory, this.armorDelete]), this.weightInspection,
+            this.carMaxWeight, this.carLength, this.carWidth, this.carHeight, this.wheelBaseLength), 
         new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient), 
         this.numberAct, this.sampleCloseDateAct, this.carGiveDateService, this.PPTOAddressAct, this.namePPTOExpertAct);
     
@@ -498,18 +520,22 @@ export default class CreateDocumentsPage extends Vue {
   async getDeclaration(): Promise<void>
   {
     let declaration = new Declaration(
-        new Laboratory(this.nameLab, this.finaleNumberLab, this.finaleDateLab),
-        new Service(this.nameService, this.entityAddressService, this.certificateDateService,
-            this.certificateNumberService, this.certificateAuthorService),
-        new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar,
-            this.chassisNumberCar, this.bodyNumberCar, new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine),
+        new Laboratory(this.nameLab, this.finaleNumberLab, this.finaleDateLab), 
+        new Service(this.nameService, this.entityAddressService, this.certificateDateService, 
+            this.certificateNumberService, this.certificateAuthorService), 
+        new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar, 
+            this.chassisNumberCar, this.bodyNumberCar, 
+            new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine, this.ecoClass,
+                this.cylindersCount, this.cylindersVolume, this.compression, this.maxPower, this.maxRotateMoment, this.supplySystem), 
+            new Wheels(this.wheelName, this.wheelWidth, this.wheelProfileSize, this.wheelRadius), 
             new UpgradeTypes([this.powerBumperFront, this.jennyFront, this.protectiveArcFront, this.vizor, this.steps,
               this.powerBumperBack, this.jennyBack, this.protectiveArcBack, this.wheelBracket, this.wheelBracketDoor,
               this.kung, this.carrier, this.ladder, this.manhole, this.metalRoof, this.farLights, this.dayLights,
               this.fogLights, this.workLights, this.snorkel, this.engineProtection, this.pullProtection,
               this.transmissionProtection, this.diskBrakesFront, this.diskBrakesBack, this.damper, this.waterBooster,
               this.sleepingBag, this.liftSpring, this.liftSpacers, this.biggerTires, this.archExtenders,
-              this.gasSet, this.gasDelete, this.swapEngine, this.swapCategory, this.armorDelete])),
+              this.gasSet, this.gasDelete, this.swapEngine, this.swapCategory, this.armorDelete]), this.weightInspection, 
+            this.carMaxWeight, this.carLength, this.carWidth, this.carHeight, this.wheelBaseLength),
         new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient), this.worksDate);
     
     this.downloadLink = declarationRequest(declaration);
