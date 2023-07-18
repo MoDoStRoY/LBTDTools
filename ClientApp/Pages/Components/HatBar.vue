@@ -11,15 +11,16 @@
         <b-navbar-item>Сайт компании</b-navbar-item>
         
         <b-navbar-dropdown label="Рабочие интерфейсы">
-          <b-navbar-item>CRM</b-navbar-item>
-          <b-navbar-item>Carcoin</b-navbar-item>
-          <b-navbar-item>SertAuto</b-navbar-item>
-          <b-navbar-item>Telegram</b-navbar-item>
-          <b-navbar-item>WhatsApp</b-navbar-item>
-          <b-navbar-item>Yandex.Mail</b-navbar-item>
+          <b-navbar-item href="https://pereoborudovanie.bitrix24.ru/crm/lead/kanban/">CRM</b-navbar-item>
+          <b-navbar-item href="https://ppto.carcoin.ru/">Carcoin</b-navbar-item>
+          <b-navbar-item href="https://sertauto.ru/searchcardotts/index">SertAuto</b-navbar-item>
+          <b-navbar-item href="https://web.telegram.org/k/">Telegram</b-navbar-item>
+          <b-navbar-item href="https://web.whatsapp.com/">WhatsApp</b-navbar-item>
+          <b-navbar-item href="https://mail.yandex.ru/">Yandex.Mail</b-navbar-item>
         </b-navbar-dropdown>
 
         <b-navbar-dropdown label="Функционал сайта">
+          <b-navbar-item tag="router-link" :to="{path: '/tickets'}">Обращения</b-navbar-item>
           <b-navbar-item tag="router-link" :to="{path: '/docs'}">Формирование документов</b-navbar-item>
           <b-navbar-item>Справка</b-navbar-item>
         </b-navbar-dropdown>

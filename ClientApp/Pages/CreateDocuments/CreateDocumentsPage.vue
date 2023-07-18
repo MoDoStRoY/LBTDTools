@@ -497,20 +497,7 @@ export default class CreateDocumentsPage extends Vue {
         new Laboratory(this.nameLab, this.finaleNumberLab, this.finaleDateLab), 
         new Service(this.nameService, this.entityAddressService, this.certificateDateService, 
             this.certificateNumberService, this.certificateAuthorService), 
-        new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar, 
-            this.chassisNumberCar, this.bodyNumberCar, 
-            new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine, this.ecoClass,
-                this.cylindersCount, this.cylindersVolume, this.compression, this.maxPower, this.maxRotateMoment, 
-                this.supplySystem),
-            new Wheels(this.wheelName, this.wheelWidth, this.wheelProfileSize, this.wheelRadius),
-            new UpgradeTypes([this.powerBumperFront, this.jennyFront, this.protectiveArcFront, this.vizor, this.steps,
-                this.powerBumperBack, this.jennyBack, this.protectiveArcBack, this.wheelBracket, this.wheelBracketDoor,
-                this.kung, this.carrier, this.ladder, this.manhole, this.metalRoof, this.farLights, this.dayLights,
-                this.fogLights, this.workLights, this.snorkel, this.engineProtection, this.pullProtection,
-                this.transmissionProtection, this.diskBrakesFront, this.diskBrakesBack, this.damper, this.waterBooster,
-                this.sleepingBag, this.liftSpring, this.liftSpacers, this.biggerTires, this.archExtenders,
-                this.gasSet, this.gasDelete, this.swapEngine, this.swapCategory, this.armorDelete]), this.weightInspection,
-            this.carMaxWeight, this.carLength, this.carWidth, this.carHeight, this.wheelBaseLength), 
+        new Car (this.nameLab), 
         new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient), 
         this.numberAct, this.sampleCloseDateAct, this.carGiveDateService, this.PPTOAddressAct, this.namePPTOExpertAct);
     
@@ -519,26 +506,7 @@ export default class CreateDocumentsPage extends Vue {
     
   async getDeclaration(): Promise<void>
   {
-    let declaration = new Declaration(
-        new Laboratory(this.nameLab, this.finaleNumberLab, this.finaleDateLab), 
-        new Service(this.nameService, this.entityAddressService, this.certificateDateService, 
-            this.certificateNumberService, this.certificateAuthorService), 
-        new Car (this.brandCar, this.modelCar, this.colorCar, this.govRegNumCar, this.releaseDate, this.VINCar, 
-            this.chassisNumberCar, this.bodyNumberCar, 
-            new Engine(this.modelEngine, this.numberEngine, this.typeEngine, this.fuelEngine, this.ecoClass,
-                this.cylindersCount, this.cylindersVolume, this.compression, this.maxPower, this.maxRotateMoment, this.supplySystem), 
-            new Wheels(this.wheelName, this.wheelWidth, this.wheelProfileSize, this.wheelRadius), 
-            new UpgradeTypes([this.powerBumperFront, this.jennyFront, this.protectiveArcFront, this.vizor, this.steps,
-              this.powerBumperBack, this.jennyBack, this.protectiveArcBack, this.wheelBracket, this.wheelBracketDoor,
-              this.kung, this.carrier, this.ladder, this.manhole, this.metalRoof, this.farLights, this.dayLights,
-              this.fogLights, this.workLights, this.snorkel, this.engineProtection, this.pullProtection,
-              this.transmissionProtection, this.diskBrakesFront, this.diskBrakesBack, this.damper, this.waterBooster,
-              this.sleepingBag, this.liftSpring, this.liftSpacers, this.biggerTires, this.archExtenders,
-              this.gasSet, this.gasDelete, this.swapEngine, this.swapCategory, this.armorDelete]), this.weightInspection, 
-            this.carMaxWeight, this.carLength, this.carWidth, this.carHeight, this.wheelBaseLength),
-        new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient), this.worksDate);
-    
-    this.downloadLink = declarationRequest(declaration);
+    //this.downloadLink = declarationRequest(Declaration);
   }
     
 }
