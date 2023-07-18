@@ -1,11 +1,15 @@
 export default class CarCertificate
 {
-    public number: string;
-    public date: string;
+    public stsNumber: string;
+    public stsDate: string;
+    public carNumber: string;
+    public carColor: string;
 
-    constructor(number: string, date: string)
+    constructor(stsNumber: string, stsDate: string, carNumber: string, carColor: string)
     {
-        this.number = number;
-        this.date = date;
+        this.stsNumber = stsNumber;
+        this.stsDate = stsDate;
+        this.carNumber = carNumber;
+        this.carColor = carColor;
     }
 }

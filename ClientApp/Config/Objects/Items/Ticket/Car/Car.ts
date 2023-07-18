@@ -11,23 +11,13 @@ import Body from "./Parts/Body";
 
 export default class Car
 {
-    public VIN: string;
-    public mark: string;
-    public model: string;
-    public type: string;
-    public drivingLicense: string;
-    public carCategory: string;
-    public yearProduction: string;
-    public engine: Engine;
-    public chassisNumber: string;
-    public maxMass: string;
-    public carManufacturer: string;
-    public otts: string;
-    public color: string;
-    
-    public wheels: Wheels;
+    //** Документы на машину **//
     public passport: CarPassport;
     public certificate: CarCertificate;
+    
+    //** Составные части **//
+    public engine: Engine;
+    public wheels: Wheels;
     public breaks: Breaks;
     public gearbox: Gearbox;
     public suspension: Suspension;
@@ -35,27 +25,13 @@ export default class Car
     public body: Body;
     public axisCount: string;
     
+    //** Булевой массив со списком изменений в конструкции
     public upgrades: UpgradeTypes;
 
-    constructor(VIN: string, mark: string, model: string, type: string, drivingLicense: string, carCategory: string, 
-                yearProduction: string, engine: Engine, chassisNumber: string, maxMass: string, 
-                carManufacturer: string, otts: string, color: string, wheels: Wheels, passport: CarPassport, 
-                certificate: CarCertificate, breaks: Breaks, gearbox: Gearbox, suspension: Suspension,
+    constructor(engine: Engine, wheels: Wheels, passport: CarPassport, certificate: CarCertificate, breaks: Breaks, gearbox: Gearbox, suspension: Suspension,
                 transmission: Transmission, body: Body, axisCount: string, upgrades: UpgradeTypes)
     {
-        this.VIN = VIN;
-        this.mark = mark;
-        this.model = model;
-        this.type = type;
-        this.drivingLicense = drivingLicense;
-        this.carCategory = carCategory;
-        this.yearProduction = yearProduction;
         this.engine = engine;
-        this.chassisNumber = chassisNumber;
-        this.maxMass = maxMass;
-        this.carManufacturer = carManufacturer;
-        this.otts = otts;
-        this.color = color;
         this.wheels = wheels;
         this.passport = passport;
         this.certificate = certificate;
