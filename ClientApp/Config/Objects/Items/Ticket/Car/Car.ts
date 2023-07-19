@@ -25,7 +25,7 @@ export default class Car
     public body: Body;
     public axisCount: string;
     
-    //** Булевой массив со списком изменений в конструкции
+    //** Массив со списком изменений в конструкции
     public upgrades: UpgradeTypes;
 
     constructor(engine: Engine, wheels: Wheels, passport: CarPassport, certificate: CarCertificate, breaks: Breaks, gearbox: Gearbox, suspension: Suspension,
