@@ -1,10 +1,12 @@
+import Upgrade from "./Parts/Upgrade";
+
 export default class UpgradeTypes
 {
-    public upgradesBoolList: boolean[];
+    public upgradesList: Upgrade[];
     
-    constructor(upgradesBoolList: boolean[]) 
+    constructor(upgradesList: Upgrade[]) 
     {
-        this.upgradesBoolList = upgradesBoolList;
+        this.upgradesList = upgradesList;
     }
     
 }
