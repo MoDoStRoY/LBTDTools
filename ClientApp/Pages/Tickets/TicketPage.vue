@@ -95,94 +95,108 @@
                 </b-tab-item>
               </b-tabs>
             </b-tab-item>
-          <b-tab-item label="Изменения в конструкции">
+          <b-tab-item label="Оказываемые услуги">
+            <b-field>
+              <b-switch v-model="changeConstructionService">Переоборудование</b-switch>
+              <b-switch v-model="sbksService">СБКТС</b-switch>
+              <b-switch v-model="eptsService">ЭПТС</b-switch>
+            </b-field>
+            <hr>
             <b-tabs>
-              <b-tab-item label="Джиповый тюнинг">
-                <b-tabs>
-                  <b-tab-item label="Перечень изменений">
-                    <b-switch v-model="frontBumper">Передний силовой бампер</b-switch>
-                    <b-switch v-model="rearBumper">Задний силовой бампер</b-switch>
-                    <b-switch v-model="frontWinch">Электролебёдка на переднем бампере</b-switch>
-                    <b-switch v-model="rearWinch">Электролебёдка на заднем бампере</b-switch>
-                    <b-switch v-model="bumperWheelBracket">Кронштейн крепления запасного колеса (бампер)</b-switch>
-                    <b-switch v-model="doorWheelBracket">Кронштейн крепления запасного колеса (дверь)</b-switch>
-                    <b-switch v-model="trunk">Экспедиционный багажник</b-switch>
-                    <b-switch v-model="ladder">Лестница для доступа к багажнику</b-switch>
-                    <b-switch v-model="farLights">Доп.фары дальнего света</b-switch>
-                    <b-switch v-model="dayLights">ДХО</b-switch>
-                    <b-switch v-model="fogLights">ПТФ</b-switch>
-                    <b-switch v-model="snorkel">Шноркель</b-switch>
-                    <b-switch v-model="sills">Пороги</b-switch>
-                    <b-switch v-model="kung">Кунг</b-switch>
-                    <b-switch v-model="suspensionLiftSprings">Лифт подвески (пружины)</b-switch>
-                    <b-switch v-model="suspensionLiftSpacers">Лифт подвески (проставки)</b-switch>
-                    <b-switch v-model="biggerWheels">Колёса с шинами увеличенного размера</b-switch>
-                    <b-switch v-model="archExtenders">Расширители колёсных арок</b-switch>
-                    <b-switch v-model="workLights">Устройства освещения на месте стоянки (рабочий свет)</b-switch>
-                    <b-switch v-model="rodProtection">Защита рулевых тяг</b-switch>
-                    <b-switch v-model="engineProtection">Защита ДВС</b-switch>
-                    <b-switch v-model="gearboxProtection">Защита КПП</b-switch>
-                    <b-switch v-model="helmDamper">Рулевой демпфер</b-switch>
-                    <b-switch v-model="helmBooster">ГУР</b-switch>
-                    <b-switch v-model="frontDiskBrakes">Передние дисковые тормоза</b-switch>
-                    <b-switch v-model="rearDiskBrakes">Задние дисковые тормоза</b-switch>
-                    <b-switch v-model="frontProtectionArc">Защитная дуга под передним бампером</b-switch>
-                    <b-switch v-model="rearProtectionArc">Защитная дуга под задним бампером</b-switch>
-                    <b-switch v-model="insideProtectionArc">Защитные дуги в бортовом кузове</b-switch>
-                    <b-switch v-model="protectiveVisor">Защитный козырёк</b-switch>
-                    <b-switch v-model="hatch">Аварийно-вентиляционный люк</b-switch>
-                    <b-switch v-model="sleepPlace">Спальное место</b-switch>
-                    <b-switch v-model="metalRoof">Металлическая крыша</b-switch>
-                  </b-tab-item>
-                  <b-tab-item label="Информация по изменениям">
-                    <b-field label="Массы">
-                      <b-input v-model="massInDefaultAfter" placeholder="Масса без нагрузки (кг)" expanded></b-input>
-                      <b-input v-model="equipmentMassAfter" placeholder="Снаряженная масса (кг)" expanded></b-input>
-                    </b-field>
-                    <b-field label="Габариты (мм)">
-                      <b-input v-model="carLengthAfter" placeholder="Длина" expanded></b-input>
-                      <b-input v-model="carWidthAfter" placeholder="Ширина" expanded></b-input>
-                      <b-input v-model="carHeightAfter" placeholder="Высота" expanded></b-input>
-                    </b-field>
-                    <b-field label="Передний силовой бампер"><b-input v-model="frontBumperMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Задний силовой бампер"><b-input v-model="rearBumperMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Электролебёдка на переднем бампере"><b-input v-model="frontWinchMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Электролебёдка на заднем бампере"><b-input v-model="rearWinchMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Кронштейн крепления запасного колеса (дверь)"><b-input v-model="doorWheelBracketMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Кронштейн крепления запасного колеса (бампер)"><b-input v-model="bumperWheelBracketMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Экспедиционный багажник"><b-input v-model="trunkMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Лестница для доступа к багажнику"><b-input v-model="ladderMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Фары дальнего света"><b-input v-model="farLightsMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="ДХО"><b-input v-model="dayLightsMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Противотуманные фары"><b-input v-model="fogLightsMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Лифт подвески"><b-input v-model="suspensionLiftHeight" placeholder="Величина"></b-input></b-field>
-                    <b-field label="Колёса с шинами увеличенного размера">
-                      <b-input v-model="wheelsMark" placeholder="Марка"></b-input>
-                      <b-input v-model="wheelsWidth" placeholder="Ширина шины"></b-input>
-                      <b-input v-model="wheelsProfile" placeholder="Профиль шины"></b-input>
-                      <b-input v-model="wheelsDiameter" placeholder="Диаметр диска"></b-input>
-                    </b-field>
-                    <b-field label="ГУР"><b-input v-model="helmBoosterMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Защитная дуга под передним бампером"><b-input v-model="frontProtectionArcMark" placeholder="Марка"></b-input></b-field>
-                    <b-field label="Защитная дуга под задним бампером"><b-input v-model="rearProtectionArcMark" placeholder="Марка"></b-input></b-field>
-                  </b-tab-item>
-                </b-tabs>
-              </b-tab-item>
-              <b-tab-item label="Обычное переоборудование (общее)">
-                <b-switch v-model="installGboSng">Монтаж ГБО (СНГ)</b-switch>
-                <b-switch v-model="installGboKpg">Монтаж ГБО (КПГ)</b-switch>
-                <b-switch v-model="replaceEngine">Замена ДВС</b-switch>
-                <b-switch v-model="uninstallGbo">Демонтаж ГБО</b-switch>
-                <b-switch v-model="installStudyEquipment">Монтаж учебного оборудования</b-switch>
-                <b-switch v-model="uninstallStudyEquipment">Демонтаж учебного оборудования</b-switch>
-              </b-tab-item>
-              <b-tab-item label="Грузовые и автобусы">
-                <b-switch v-model="replaceCategoryDB">Смена категории D -> B</b-switch>
-                <b-switch v-model="replaceCategoryDC">Смена категории D -> C</b-switch>
-                <b-switch v-model="replaceCategoryCD">Смена категории C -> D</b-switch>
-                <b-switch v-model="flatbedIsothermalBody">Бортовая платформа -> изотермический фургон</b-switch>
-                <b-switch v-model="HOU">ХОУ</b-switch>
-              </b-tab-item>
+            <b-tab-item label="Изменения в конструкции">
+              <b-switch v-model="jeepTuningType">Джиповый тюнинг</b-switch>
+              <b-switch v-model="truckTuningType">Грузовой тюнинг</b-switch>
+              <b-switch v-model="changeCategoryTypeType">Смена категории/типа</b-switch>
+              <b-switch v-model="otherType">Остальное</b-switch>
+              <b-tabs>
+                <b-tab-item label="Джиповый тюнинг">
+                  <b-tabs>
+                    <b-tab-item label="Перечень изменений">
+                      <b-switch v-model="frontBumper">Передний силовой бампер</b-switch>
+                      <b-switch v-model="rearBumper">Задний силовой бампер</b-switch>
+                      <b-switch v-model="frontWinch">Электролебёдка на переднем бампере</b-switch>
+                      <b-switch v-model="rearWinch">Электролебёдка на заднем бампере</b-switch>
+                      <b-switch v-model="bumperWheelBracket">Кронштейн крепления запасного колеса (бампер)</b-switch>
+                      <b-switch v-model="doorWheelBracket">Кронштейн крепления запасного колеса (дверь)</b-switch>
+                      <b-switch v-model="trunk">Экспедиционный багажник</b-switch>
+                      <b-switch v-model="ladder">Лестница для доступа к багажнику</b-switch>
+                      <b-switch v-model="farLights">Доп.фары дальнего света</b-switch>
+                      <b-switch v-model="dayLights">ДХО</b-switch>
+                      <b-switch v-model="fogLights">ПТФ</b-switch>
+                      <b-switch v-model="snorkel">Шноркель</b-switch>
+                      <b-switch v-model="sills">Пороги</b-switch>
+                      <b-switch v-model="kung">Кунг</b-switch>
+                      <b-switch v-model="suspensionLiftSprings">Лифт подвески (пружины)</b-switch>
+                      <b-switch v-model="suspensionLiftSpacers">Лифт подвески (проставки)</b-switch>
+                      <b-switch v-model="biggerWheels">Колёса с шинами увеличенного размера</b-switch>
+                      <b-switch v-model="archExtenders">Расширители колёсных арок</b-switch>
+                      <b-switch v-model="workLights">Устройства освещения на месте стоянки (рабочий свет)</b-switch>
+                      <b-switch v-model="rodProtection">Защита рулевых тяг</b-switch>
+                      <b-switch v-model="engineProtection">Защита ДВС</b-switch>
+                      <b-switch v-model="gearboxProtection">Защита КПП</b-switch>
+                      <b-switch v-model="helmDamper">Рулевой демпфер</b-switch>
+                      <b-switch v-model="helmBooster">ГУР</b-switch>
+                      <b-switch v-model="frontDiskBrakes">Передние дисковые тормоза</b-switch>
+                      <b-switch v-model="rearDiskBrakes">Задние дисковые тормоза</b-switch>
+                      <b-switch v-model="frontProtectionArc">Защитная дуга под передним бампером</b-switch>
+                      <b-switch v-model="rearProtectionArc">Защитная дуга под задним бампером</b-switch>
+                      <b-switch v-model="insideProtectionArc">Защитные дуги в бортовом кузове</b-switch>
+                      <b-switch v-model="protectiveVisor">Защитный козырёк</b-switch>
+                      <b-switch v-model="hatch">Аварийно-вентиляционный люк</b-switch>
+                      <b-switch v-model="sleepPlace">Спальное место</b-switch>
+                      <b-switch v-model="metalRoof">Металлическая крыша</b-switch>
+                    </b-tab-item>
+                    <b-tab-item label="Информация по изменениям">
+                      <b-field label="Массы">
+                        <b-input v-model="massInDefaultAfter" placeholder="Масса без нагрузки (кг)" expanded></b-input>
+                        <b-input v-model="equipmentMassAfter" placeholder="Снаряженная масса (кг)" expanded></b-input>
+                      </b-field>
+                      <b-field label="Габариты (мм)">
+                        <b-input v-model="carLengthAfter" placeholder="Длина" expanded></b-input>
+                        <b-input v-model="carWidthAfter" placeholder="Ширина" expanded></b-input>
+                        <b-input v-model="carHeightAfter" placeholder="Высота" expanded></b-input>
+                      </b-field>
+                      <b-field label="Передний силовой бампер"><b-input v-model="frontBumperMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Задний силовой бампер"><b-input v-model="rearBumperMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Электролебёдка на переднем бампере"><b-input v-model="frontWinchMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Электролебёдка на заднем бампере"><b-input v-model="rearWinchMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Кронштейн крепления запасного колеса (дверь)"><b-input v-model="doorWheelBracketMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Кронштейн крепления запасного колеса (бампер)"><b-input v-model="bumperWheelBracketMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Экспедиционный багажник"><b-input v-model="trunkMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Лестница для доступа к багажнику"><b-input v-model="ladderMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Фары дальнего света"><b-input v-model="farLightsMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="ДХО"><b-input v-model="dayLightsMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Противотуманные фары"><b-input v-model="fogLightsMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Лифт подвески"><b-input v-model="suspensionLiftHeight" placeholder="Величина"></b-input></b-field>
+                      <b-field label="Колёса с шинами увеличенного размера">
+                        <b-input v-model="wheelsMark" placeholder="Марка"></b-input>
+                        <b-input v-model="wheelsWidth" placeholder="Ширина шины"></b-input>
+                        <b-input v-model="wheelsProfile" placeholder="Профиль шины"></b-input>
+                        <b-input v-model="wheelsDiameter" placeholder="Диаметр диска"></b-input>
+                      </b-field>
+                      <b-field label="ГУР"><b-input v-model="helmBoosterMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Защитная дуга под передним бампером"><b-input v-model="frontProtectionArcMark" placeholder="Марка"></b-input></b-field>
+                      <b-field label="Защитная дуга под задним бампером"><b-input v-model="rearProtectionArcMark" placeholder="Марка"></b-input></b-field>
+                    </b-tab-item>
+                  </b-tabs>
+                </b-tab-item>
+                <b-tab-item label="Обычное переоборудование (общее)">
+                  <b-switch v-model="installGboSng">Монтаж ГБО (СНГ)</b-switch>
+                  <b-switch v-model="installGboKpg">Монтаж ГБО (КПГ)</b-switch>
+                  <b-switch v-model="replaceEngine">Замена ДВС</b-switch>
+                  <b-switch v-model="uninstallGbo">Демонтаж ГБО</b-switch>
+                  <b-switch v-model="installStudyEquipment">Монтаж учебного оборудования</b-switch>
+                  <b-switch v-model="uninstallStudyEquipment">Демонтаж учебного оборудования</b-switch>
+                </b-tab-item>
+                <b-tab-item label="Грузовые и автобусы">
+                  <b-switch v-model="replaceCategoryDB">Смена категории D -> B</b-switch>
+                  <b-switch v-model="replaceCategoryDC">Смена категории D -> C</b-switch>
+                  <b-switch v-model="replaceCategoryCD">Смена категории C -> D</b-switch>
+                  <b-switch v-model="flatbedIsothermalBody">Бортовая платформа -> изотермический фургон</b-switch>
+                  <b-switch v-model="HOU">ХОУ</b-switch>
+                </b-tab-item>
+              </b-tabs>
+            </b-tab-item>
             </b-tabs>
           </b-tab-item>
         </b-tabs>
@@ -206,6 +220,7 @@
         <b-dropdown-item>Договор физ.лицо заключение</b-dropdown-item>
         <b-dropdown-item>Договор физ.лицо протокол</b-dropdown-item>
       </b-dropdown>
+      <b-field><b-button label="Проверить сборку объекта" @click="testBuilding()"></b-button></b-field>
     </div>
     
   </div>
@@ -215,6 +230,8 @@
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import CommentInCard from "../../Config/Objects/SystemFrontObjects/CommentInCard";
+import UpgradeTypes from "../../Config/Objects/Items/Ticket/Car/UpgradeTypes";
+import TicketBuilder from "../../Config/Objects/SystemFrontObjects/TicketBuilder";
 
 @Component
 export default class TicketsPage extends Vue 
@@ -275,7 +292,19 @@ export default class TicketsPage extends Vue
   carNumber: string = "";
   carColor: string = "";
   
+  //** Виды услуг **//
+  changeConstructionService: boolean = false;
+  sbksService: boolean = false;
+  eptsService: boolean = false;
+  
+  //** Виды переоборудования **//
+  jeepTuningType: boolean = false;
+  truckTuningType: boolean = false;
+  changeCategoryTypeType: boolean = false;
+  otherType: boolean = false;
+  
   //** Флаги изменений в конструкции **//
+  //** Джиповый тюинг
   frontBumper: boolean = false;
   rearBumper: boolean = false;
   frontWinch: boolean = false;
@@ -309,17 +338,24 @@ export default class TicketsPage extends Vue
   hatch: boolean = false;
   sleepPlace: boolean = false;
   metalRoof: boolean = false;
+  
+  //** Грузовой тюнинг
+  HOU: boolean = false;
+  
+  //** Смена категории/типа
+  replaceCategoryDB: boolean = false;
+  replaceCategoryDC: boolean = false;
+  replaceCategoryCD: boolean = false;
+  flatbedIsothermalBody: boolean = false;
+  
+  //** Остальное
   installGboSng: boolean = false;
   installGboKpg: boolean = false;
   replaceEngine: boolean = false;
   uninstallGbo: boolean = false;
   installStudyEquipment: boolean = false;
   uninstallStudyEquipment: boolean = false;
-  replaceCategoryDB: boolean = false;
-  replaceCategoryDC: boolean = false;
-  replaceCategoryCD: boolean = false;
-  flatbedIsothermalBody: boolean = false;
-  HOU: boolean = false;
+  
   
   //** Доп.информация по изменениям **//
   //** Джиповый тюнинг **//
@@ -347,6 +383,59 @@ export default class TicketsPage extends Vue
   helmBoosterMark: string = "";
   frontProtectionArcMark: string = "";
   rearProtectionArcMark: string = "";
+  
+  //** Передача данных в билдер объекта карточки **//
+  
+  //** Объекты предварительной сборки карточки **//
+  jeepTuningChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
+  truckTuningChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
+  changeCategoryTypeChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
+  otherChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
+  //**//
+
+  testBuilding()
+  {
+    if (this.changeConstructionService)
+    {
+      if (this.jeepTuningType)
+      {
+        this.jeepTuningChanges = TicketBuilder.buildJeepTuningChanges
+        (
+            this.frontBumper, this.rearBumper, this.frontWinch, this.rearWinch, this.bumperWheelBracket, this.doorWheelBracket, this.trunk,
+            this.ladder, this.farLights, this.dayLights, this.fogLights, this.snorkel, this.sills, this.kung, this.suspensionLiftSprings,
+            this.suspensionLiftSpacers, this.biggerWheels, this.archExtenders, this.workLights, this.rodProtection,
+            this.engineProtection, this.gearboxProtection, this.helmDamper, this.helmBooster, this.frontDiskBrakes, this.rearDiskBrakes,
+            this.frontProtectionArc, this.rearProtectionArc, this.insideProtectionArc, this.protectiveVisor, this.hatch, this.sleepPlace, this.metalRoof
+        );
+        console.log("Сборка jeepTuningChanges успешно произведена!")
+      }
+      if (this.truckTuningType)
+      {
+        this.truckTuningChanges = TicketBuilder.buildTruckTuningChanges
+        (
+            this.HOU
+        );
+        console.log("Сборка truckTuningChanges успешно произведена!")
+      }
+      if (this.changeCategoryTypeType)
+      {
+        this.changeCategoryTypeChanges = TicketBuilder.buildChangeCategoryTypeChanges
+        (
+            this.replaceCategoryDB, this.replaceCategoryDC, this.replaceCategoryCD, this.flatbedIsothermalBody
+        );
+        console.log("Сборка changeCategoryTypeChanges успешно произведена!")
+      }
+      if (this.otherType)
+      {
+        this.otherChanges = TicketBuilder.buildOtherChanges
+        (
+            this.installGboSng, this.installGboKpg, this.replaceEngine, this.uninstallGbo, this.installStudyEquipment,
+            this.uninstallStudyEquipment
+        );
+        console.log("Сборка otherChanges успешно произведена!")
+      }
+    }
+  }
   
   switchCard(input: string): void
   {

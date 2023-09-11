@@ -283,17 +283,6 @@
 <script lang="ts">
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
-import Act from "../../Config/Objects/Docs/Act";
-import Laboratory from "../../Config/Objects/Items/Laboratory";
-import Service from "../../Config/Objects/Items/Service";
-import Car from "../../Config/Objects/Items/Car/Car";
-import Engine from "../../Config/Objects/Items/Car/Parts/Engine";
-import {actRequest} from "../../Scripts/CreateDocuments/Act";
-import Client from "../../Config/Objects/Items/Client";
-import UpgradeTypes from "../../Config/Objects/Items/Car/UpgradeTypes";
-import Declaration from "../../Config/Objects/Docs/Declaration";
-import {declarationRequest} from "../../Scripts/CreateDocuments/Declaration";
-import Wheels from "../../Config/Objects/Items/Car/Parts/Wheels";
 
 @Component
 export default class CreateDocumentsPage extends Vue {
@@ -486,23 +475,23 @@ export default class CreateDocumentsPage extends Vue {
   getDocument()
   {
     if (this.docAct)
-      this.getAct();
+      //this.getAct();
     if (this.docDeclaration)
       this.getDeclaration();
   }
 
-  async getAct(): Promise<void>
+  /**async getAct(): Promise<void>
   {
     let act = new Act(
         new Laboratory(this.nameLab, this.finaleNumberLab, this.finaleDateLab), 
         new Service(this.nameService, this.entityAddressService, this.certificateDateService, 
             this.certificateNumberService, this.certificateAuthorService), 
-        new Car (this.nameLab), 
+        new Car (), 
         new Client(this.nameClient, this.passportNumberClient, this.passportAuthorClient, this.addressClient), 
         this.numberAct, this.sampleCloseDateAct, this.carGiveDateService, this.PPTOAddressAct, this.namePPTOExpertAct);
     
     this.downloadLink = actRequest(act);
-  }
+  } **/
     
   async getDeclaration(): Promise<void>
   {
