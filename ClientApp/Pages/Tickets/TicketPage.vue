@@ -203,7 +203,22 @@
       </div>
       
       <div v-if="clientInfo">
-        
+        <b-tabs>
+          <b-tab-item label="Основные данные контакта">
+            <b-field label="ФИО">
+              <b-input placeholder="Фамилия" expanded></b-input >
+              <b-input placeholder="Имя" expanded></b-input>
+              <b-input placeholder="Отчество" expanded></b-input>
+            </b-field>
+            <b-field label="Номер телефона"><b-input placeholder="+79511155378" expanded></b-input></b-field>
+            <b-field label="Серия и номер паспорта">
+              <b-input placeholder="Серия" expanded></b-input>
+              <b-input placeholder="Номер" expanded></b-input>
+            </b-field>
+            <b-field label="Кем выдан паспорт"><b-input expanded></b-input></b-field>
+            <b-field label="Адрес по прописке"><b-input expanded></b-input></b-field>
+          </b-tab-item>
+        </b-tabs>
       </div>
       
     </div>
