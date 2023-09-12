@@ -26,15 +26,16 @@ export default class Car
     public axisCount: string;
     
     //** Массив со списком изменений в конструкции
-    public upgrades: UpgradeTypes;
+    public upgrades: UpgradeTypes[];
 
-    constructor(engine: Engine, wheels: Wheels, passport: CarPassport, certificate: CarCertificate, breaks: Breaks, gearbox: Gearbox, suspension: Suspension,
-                transmission: Transmission, body: Body, axisCount: string, upgrades: UpgradeTypes)
+    constructor(passport: CarPassport, certificate: CarCertificate, engine: Engine, wheels: Wheels, 
+                breaks: Breaks, gearbox: Gearbox, suspension: Suspension,
+                transmission: Transmission, body: Body, axisCount: string, upgrades: UpgradeTypes[])
     {
-        this.engine = engine;
-        this.wheels = wheels;
         this.passport = passport;
         this.certificate = certificate;
+        this.engine = engine;
+        this.wheels = wheels;
         this.breaks = breaks;
         this.gearbox = gearbox;
         this.suspension = suspension;

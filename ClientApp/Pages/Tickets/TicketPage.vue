@@ -205,18 +205,18 @@
       <div v-if="clientInfo">
         <b-tabs>
           <b-tab-item label="Основные данные контакта">
-            <b-field label="ФИО">
-              <b-input placeholder="Фамилия" expanded></b-input >
-              <b-input placeholder="Имя" expanded></b-input>
-              <b-input placeholder="Отчество" expanded></b-input>
+            <b-field v-model="clientFIO" label="ФИО">
+              <b-input v-model="clientLastName" placeholder="Фамилия" expanded></b-input >
+              <b-input v-model="clientName" placeholder="Имя" expanded></b-input>
+              <b-input v-model="clientMiddleName" placeholder="Отчество" expanded></b-input>
             </b-field>
-            <b-field label="Номер телефона"><b-input placeholder="+79511155378" expanded></b-input></b-field>
+            <b-field label="Номер телефона"><b-input v-model="clientPhoneNumber" placeholder="+79511155378" expanded></b-input></b-field>
             <b-field label="Серия и номер паспорта">
-              <b-input placeholder="Серия" expanded></b-input>
-              <b-input placeholder="Номер" expanded></b-input>
+              <b-input v-model="clientPassportSeries" placeholder="Серия" expanded></b-input>
+              <b-input v-model="clientPassportNumber" placeholder="Номер" expanded></b-input>
             </b-field>
-            <b-field label="Кем выдан паспорт"><b-input expanded></b-input></b-field>
-            <b-field label="Адрес по прописке"><b-input expanded></b-input></b-field>
+            <b-field label="Кем выдан паспорт"><b-input v-model="clientPassportAuthor" placeholder="ГУ МВД АБВГД ФРГ" expanded></b-input></b-field>
+            <b-field label="Адрес по прописке"><b-input v-model="clientPassportAddress" placeholder="г.Воркута, ул.Ленина, д.8, кв.21" expanded></b-input></b-field>
           </b-tab-item>
         </b-tabs>
       </div>
@@ -276,8 +276,22 @@ export default class TicketsPage extends Vue
     this.textOfNewComment = "";
   }
   
+  //** Объект тикета, собираемый постепенно **//
+  ticket: TicketBuilder = new TicketBuilder()
+  
+  //** Данные клиента **//
+  clientFIO: string = "";
+  clientLastName: string = "";
+  clientName: string = "";
+  clientMiddleName: string = "";
+  clientPhoneNumber: string = "";
+  clientPassportSeries: string = "";
+  clientPassportNumber: string = "";
+  clientPassportAuthor: string = "";
+  clientPassportAddress: string = "";
+  
   //** Документы на ТС **//
-  //** Данные из ПТС **//
+  //** Данные из ПТС 
   ptsNumber: string = "";
   ptsDate: string = "";
   VIN: string = "";
@@ -301,7 +315,7 @@ export default class TicketsPage extends Vue
   carManufacturer: string = "";
   otts: string = "";
   
-  //** Данные из СТС **//
+  //** Данные из СТС 
   stsNumber: string = "";
   stsDate: string = "";
   carNumber: string = "";
@@ -373,7 +387,7 @@ export default class TicketsPage extends Vue
   
   
   //** Доп.информация по изменениям **//
-  //** Джиповый тюнинг **//
+  //** Джиповый тюнинг 
   massInDefaultAfter: string = "";
   equipmentMassAfter: string = "";
   carLengthAfter: string = "";
@@ -401,12 +415,12 @@ export default class TicketsPage extends Vue
   
   //** Передача данных в билдер объекта карточки **//
   
-  //** Объекты предварительной сборки карточки **//
+  //** Объекты предварительной сборки карточки 
   jeepTuningChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
   truckTuningChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
   changeCategoryTypeChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
   otherChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
-  //**//
+  
 
   testBuilding()
   {

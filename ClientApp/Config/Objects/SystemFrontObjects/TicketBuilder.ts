@@ -2,6 +2,15 @@ import ChangedParam from "../Items/Ticket/Car/ChangedParam";
 import UpgradeTypes from "../Items/Ticket/Car/UpgradeTypes";
 import Client from "../Items/Client";
 import Car from "../Items/Ticket/Car/Car";
+import Engine from "../Items/Ticket/Car/Parts/Engine";
+import Wheels from "../Items/Ticket/Car/Parts/Wheels";
+import Breaks from "../Items/Ticket/Car/Parts/Breaks";
+import Gearbox from "../Items/Ticket/Car/Parts/Gearbox";
+import Suspension from "../Items/Ticket/Car/Parts/Suspension";
+import Transmission from "../Items/Ticket/Car/Parts/Transmission";
+import Body from "../Items/Ticket/Car/Parts/Body";
+import CarPassport from "../Items/Ticket/Car/CarPassport";
+import CarCertificate from "../Items/Ticket/Car/CarCertificate";
 
 export default class TicketBuilder 
 {
@@ -19,13 +28,6 @@ export default class TicketBuilder
     public truckTuningType: boolean;
     public changeCategoryTypeType: boolean;
     public otherType: boolean;
-    
-    // Массивы переменных изменений в конструкции
-    public jeepTuningChanges: UpgradeTypes;
-    public truckTuningChanges: UpgradeTypes
-    public changeCategoryTypeChanges: UpgradeTypes;
-    public otherChanges: UpgradeTypes;
-    public changedParams: ChangedParam;
     
     public static buildJeepTuningChanges
     (
@@ -163,10 +165,29 @@ export default class TicketBuilder
         return otherChanges;
     }
     
+    public static initializationConstructor()
+    {
+        return new TicketBuilder
+        (
+            new Client("", "", "", "", ""), 
+            new Car(new CarPassport("", "", "", "", "", "",
+                    "", "", "", "", "", 
+                    "", "", "", "", "",
+                    "", "", "", "", "", ""), 
+                new CarCertificate("", "", "", ""), new Engine("", 
+                    "", "", "", "", "", "",
+                "", "", "", ""), new Wheels("", "",
+                "", ""), new Breaks("", "", ""), new Gearbox("", ""),
+                new Suspension("", ""), new Transmission(""), new Body("", "", 
+                    "", "", "", "", "", "",
+                    "", ""), "", []), false, false, false, 
+            false, false, false, false
+            );
+    }
+    
     constructor(currentClient: Client, currentCar: Car, changeConstructionService: boolean, sbksService: boolean,
     eptsService: boolean, jeepTuningType: boolean, truckTuningType: boolean, changeCategoryTypeType: boolean,
-                otherType: boolean, jeepTuningChanges: UpgradeTypes, truckTuningChanges: UpgradeTypes,
-                changeCategoryTypeChanges: UpgradeTypes, otherChanges: UpgradeTypes, changedParams: ChangedParam) 
+                otherType: boolean) 
     {
         this.currentClient = currentClient;
         this.currentCar = currentCar;
@@ -177,11 +198,6 @@ export default class TicketBuilder
         this.truckTuningType = truckTuningType;
         this.changeCategoryTypeType = changeCategoryTypeType;
         this.otherType = otherType;
-        this.jeepTuningChanges = jeepTuningChanges;
-        this.truckTuningChanges = truckTuningChanges;
-        this.changeCategoryTypeChanges = changeCategoryTypeChanges;
-        this.otherChanges = otherChanges;
-        this.changedParams = changedParams;
     }
     
 }
