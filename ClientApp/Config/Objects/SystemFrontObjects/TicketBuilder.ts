@@ -29,6 +29,12 @@ export default class TicketBuilder
     public changeCategoryTypeType: boolean;
     public otherType: boolean;
     
+    //Массивы изменений в конструкции
+    public jeepTuningChanges: UpgradeTypes;
+    public truckTuningChanges: UpgradeTypes;
+    public changeCategoryTypeChanges: UpgradeTypes;
+    public otherChanges: UpgradeTypes;
+    
     public static buildJeepTuningChanges
     (
         frontBumper:boolean, rearBumper:boolean, frontWinch:boolean, rearWinch:boolean, bumperWheelBracket:boolean, 
@@ -181,13 +187,16 @@ export default class TicketBuilder
                 new Suspension("", ""), new Transmission(""), new Body("", "", 
                     "", "", "", "", "", "",
                     "", ""), "", []), false, false, false, 
-            false, false, false, false
+            false, false, false, false, 
+            new UpgradeTypes([""], ""), new UpgradeTypes([], ""), 
+            new UpgradeTypes([""], ""), new UpgradeTypes([], "")
             );
     }
     
     constructor(currentClient: Client, currentCar: Car, changeConstructionService: boolean, sbksService: boolean,
     eptsService: boolean, jeepTuningType: boolean, truckTuningType: boolean, changeCategoryTypeType: boolean,
-                otherType: boolean) 
+                otherType: boolean, jeepTuningChanges: UpgradeTypes, truckTuningChanges: UpgradeTypes, 
+                changeCategoryTypeChanges: UpgradeTypes, otherChanges: UpgradeTypes) 
     {
         this.currentClient = currentClient;
         this.currentCar = currentCar;
@@ -198,6 +207,10 @@ export default class TicketBuilder
         this.truckTuningType = truckTuningType;
         this.changeCategoryTypeType = changeCategoryTypeType;
         this.otherType = otherType;
+        this.jeepTuningChanges = jeepTuningChanges;
+        this.truckTuningChanges = truckTuningChanges;
+        this.changeCategoryTypeChanges = changeCategoryTypeChanges;
+        this.otherChanges = otherChanges;
     }
     
 }

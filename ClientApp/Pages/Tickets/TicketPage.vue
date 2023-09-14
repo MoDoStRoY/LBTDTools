@@ -276,9 +276,6 @@ export default class TicketsPage extends Vue
     this.textOfNewComment = "";
   }
   
-  //** Объект тикета, собираемый постепенно **//
-  ticket: TicketBuilder = new TicketBuilder()
-  
   //** Данные клиента **//
   clientFIO: string = "";
   clientLastName: string = "";
@@ -414,12 +411,9 @@ export default class TicketsPage extends Vue
   rearProtectionArcMark: string = "";
   
   //** Передача данных в билдер объекта карточки **//
-  
-  //** Объекты предварительной сборки карточки 
-  jeepTuningChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
-  truckTuningChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
-  changeCategoryTypeChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
-  otherChanges: UpgradeTypes = new UpgradeTypes(["null"], "null");
+
+  //** Объект тикета, собираемый постепенно 
+  ticket: TicketBuilder = TicketBuilder.initializationConstructor();
   
 
   testBuilding()
@@ -428,7 +422,7 @@ export default class TicketsPage extends Vue
     {
       if (this.jeepTuningType)
       {
-        this.jeepTuningChanges = TicketBuilder.buildJeepTuningChanges
+        this.ticket.jeepTuningChanges = TicketBuilder.buildJeepTuningChanges
         (
             this.frontBumper, this.rearBumper, this.frontWinch, this.rearWinch, this.bumperWheelBracket, this.doorWheelBracket, this.trunk,
             this.ladder, this.farLights, this.dayLights, this.fogLights, this.snorkel, this.sills, this.kung, this.suspensionLiftSprings,
@@ -440,7 +434,7 @@ export default class TicketsPage extends Vue
       }
       if (this.truckTuningType)
       {
-        this.truckTuningChanges = TicketBuilder.buildTruckTuningChanges
+        this.ticket.truckTuningChanges = TicketBuilder.buildTruckTuningChanges
         (
             this.HOU
         );
@@ -448,7 +442,7 @@ export default class TicketsPage extends Vue
       }
       if (this.changeCategoryTypeType)
       {
-        this.changeCategoryTypeChanges = TicketBuilder.buildChangeCategoryTypeChanges
+        this.ticket.changeCategoryTypeChanges = TicketBuilder.buildChangeCategoryTypeChanges
         (
             this.replaceCategoryDB, this.replaceCategoryDC, this.replaceCategoryCD, this.flatbedIsothermalBody
         );
@@ -456,7 +450,7 @@ export default class TicketsPage extends Vue
       }
       if (this.otherType)
       {
-        this.otherChanges = TicketBuilder.buildOtherChanges
+        this.ticket.otherChanges = TicketBuilder.buildOtherChanges
         (
             this.installGboSng, this.installGboKpg, this.replaceEngine, this.uninstallGbo, this.installStudyEquipment,
             this.uninstallStudyEquipment
