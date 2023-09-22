@@ -216,7 +216,7 @@
               <b-input v-model="clientPassportNumber" placeholder="Номер" expanded></b-input>
             </b-field>
             <b-field label="Кем выдан паспорт"><b-input v-model="clientPassportAuthor" placeholder="ГУ МВД АБВГД ФРГ" expanded></b-input></b-field>
-            <b-field label="Адрес по прописке"><b-input v-model="clientPassportAddress" placeholder="г.Воркута, ул.Ленина, д.8, кв.21" expanded></b-input></b-field>
+            <b-field label="Адрес по прописке"><b-input v-model="clientAddress" placeholder="г.Воркута, ул.Ленина, д.8, кв.21" expanded></b-input></b-field>
           </b-tab-item>
         </b-tabs>
       </div>
@@ -245,7 +245,6 @@
 import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import CommentInCard from "../../Config/Objects/SystemFrontObjects/CommentInCard";
-import UpgradeTypes from "../../Config/Objects/Items/Ticket/Car/UpgradeTypes";
 import TicketBuilder from "../../Config/Objects/SystemFrontObjects/TicketBuilder";
 
 @Component
@@ -285,7 +284,7 @@ export default class TicketsPage extends Vue
   clientPassportSeries: string = "";
   clientPassportNumber: string = "";
   clientPassportAuthor: string = "";
-  clientPassportAddress: string = "";
+  clientAddress: string = "";
   
   //** Документы на ТС **//
   //** Данные из ПТС 
@@ -457,6 +456,12 @@ export default class TicketsPage extends Vue
         );
         console.log("Сборка otherChanges успешно произведена!")
       }
+      this.ticket.currentClient = TicketBuilder.buildClient
+      (
+          this.clientLastName, this.clientName, this.clientMiddleName, this.clientPhoneNumber, this.clientPassportNumber,
+          this.clientPassportAuthor, this.clientAddress
+      );
+      //this.ticket.currentCar = TicketBuilder.buildCar()
     }
   }
   

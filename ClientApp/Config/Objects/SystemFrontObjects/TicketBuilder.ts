@@ -171,11 +171,31 @@ export default class TicketBuilder
         return otherChanges;
     }
     
+    public static buildClient
+    (
+        clientLastName: string, clientName: string, clientMiddleName: string, 
+        clientPhoneNumber: string, clientPassportNumber: string, clientPassportAuthor: string, 
+        clientAddress: string
+    )
+    {
+        return new Client 
+        (
+            clientLastName, clientName, clientMiddleName, 
+            clientPhoneNumber, clientPassportNumber, clientPassportAuthor, 
+            clientAddress
+        )
+    }
+    
+    public static buildCar()
+    {
+        return null;
+    }
+    
     public static initializationConstructor()
     {
         return new TicketBuilder
         (
-            new Client("", "", "", "", ""), 
+            new Client("", "", "", "", "", "", ""), 
             new Car(new CarPassport("", "", "", "", "", "",
                     "", "", "", "", "", 
                     "", "", "", "", "",
