@@ -35,6 +35,9 @@ export default class TicketBuilder
     public changeCategoryTypeChanges: UpgradeTypes;
     public otherChanges: UpgradeTypes;
     
+    //Связь с юзерами
+    public ownerID: number;
+    
     public static buildJeepTuningChanges
     (
         frontBumper:boolean, rearBumper:boolean, frontWinch:boolean, rearWinch:boolean, bumperWheelBracket:boolean, 
@@ -186,9 +189,66 @@ export default class TicketBuilder
         )
     }
     
-    public static buildCar()
+    public static buildCar
+    (
+        //ПТС
+        ptsNumber: string, ptsDate: string, VIN: string,carMark: string, carModel: string, 
+        carType: string, carDrivingLicense: string, carCategoryDefault: string, 
+        carYearProduction: string, engineModelDefault: string, engineNumberDefault: string, chassisNumber: string,
+        bodyNumber: string, enginePowerHorseDefault: string, enginePowerKwtDefault: string, workVolumeDefault: string, 
+        engineTypeDefault: string, ecoClassDefault: string, maxMassDefault: string, massInDefaultDefault: string, 
+        carManufacturer: string, otts: string, 
+        //СТС
+        stsNumber: string, stsDate: string, 
+        carNumber: string, carColor: string, 
+        //Двигатель
+        engineModel: string, engineNumber: string,
+        engineType: string, engineFuel: string, engineEcoClass: string, 
+        engineCylindersCount: string, engineCylindersVolume: string, engineCompression: string,
+        engineMaxPower: string, engineMaxRotateMoment: string, engineSupplySystem: string,
+        //Колёса
+        wheelName: string, wheelWidth: string, wheelProfileSize: string, wheelRadius: string,
+        //Тормоза
+        breaksWorkType: string, breaksSpareType: string, breaksParkingType: string,
+        //КПП
+        gearboxMark: string, gearboxType: string,
+        //Подвеска
+        suspensionFrontType: string, suspensionRearType: string,
+        //Трансмиссия
+        transmissionType: string, 
+        //Кузов
+        bodyType: string, bodyPassengerSeatsFrontRear: string, bodyLoadingSpaceType: string,
+        bodyCabinType: string, bodyPassengerSeatsBus: string, bodySeatsBus: string, bodyLoadCompartment: string,
+        bodyFrame: string,
+        //Количество осей
+        axisCount: string,
+        //Массивы с переоборудованием
+        jeepTuningChanges: UpgradeTypes, truckTuningChanges: UpgradeTypes, 
+        changeCategoryTypeChanges: UpgradeTypes, otherChanges: UpgradeTypes,
+    )
     {
-        return null;
+        return new Car(new CarPassport(ptsNumber, ptsDate, VIN, carMark, carModel, carType, carDrivingLicense,
+                carCategoryDefault, carYearProduction, engineModelDefault, engineNumberDefault, chassisNumber,
+                bodyNumber, enginePowerHorseDefault, enginePowerKwtDefault, workVolumeDefault, engineTypeDefault,
+                ecoClassDefault, maxMassDefault, massInDefaultDefault, carManufacturer, otts),
+            //СТС
+            new CarCertificate(stsNumber, stsDate, carNumber, carColor),
+            //Составные части
+            new Engine(engineModel, engineNumber, engineType, engineFuel, engineEcoClass, engineCylindersCount,
+                engineCylindersVolume, engineCompression, engineMaxPower, engineMaxRotateMoment,
+                engineSupplySystem),
+            new Wheels(wheelName, wheelWidth, wheelProfileSize, wheelRadius),
+            new Breaks(breaksWorkType, breaksSpareType, breaksParkingType),
+            new Gearbox(gearboxMark, gearboxType),
+            new Suspension(suspensionFrontType, suspensionRearType),
+            new Transmission(transmissionType),
+            new Body(bodyType, bodyPassengerSeatsFrontRear, bodyLoadingSpaceType,
+                bodyCabinType, bodyPassengerSeatsBus, bodySeatsBus, bodyLoadCompartment,
+                bodyFrame, carCategoryDefault),
+            //Количество осей
+            axisCount,
+            //Массивы с изменениями в конструкции
+            jeepTuningChanges, truckTuningChanges, changeCategoryTypeChanges, otherChanges)
     }
     
     public static initializationConstructor()
@@ -206,17 +266,18 @@ export default class TicketBuilder
                 "", ""), new Breaks("", "", ""), new Gearbox("", ""),
                 new Suspension("", ""), new Transmission(""), new Body("", "", 
                     "", "", "", "", "", "",
-                    "", ""), "", []), false, false, false, 
+                    ""), "", new UpgradeTypes([],""), new UpgradeTypes([],""),
+                new UpgradeTypes([],""), new UpgradeTypes([],"")), false, false, false, 
             false, false, false, false, 
             new UpgradeTypes([""], ""), new UpgradeTypes([], ""), 
-            new UpgradeTypes([""], ""), new UpgradeTypes([], "")
+            new UpgradeTypes([""], ""), new UpgradeTypes([], ""), 0
             );
     }
     
     constructor(currentClient: Client, currentCar: Car, changeConstructionService: boolean, sbksService: boolean,
     eptsService: boolean, jeepTuningType: boolean, truckTuningType: boolean, changeCategoryTypeType: boolean,
                 otherType: boolean, jeepTuningChanges: UpgradeTypes, truckTuningChanges: UpgradeTypes, 
-                changeCategoryTypeChanges: UpgradeTypes, otherChanges: UpgradeTypes) 
+                changeCategoryTypeChanges: UpgradeTypes, otherChanges: UpgradeTypes, ownerID: number) 
     {
         this.currentClient = currentClient;
         this.currentCar = currentCar;
@@ -231,6 +292,7 @@ export default class TicketBuilder
         this.truckTuningChanges = truckTuningChanges;
         this.changeCategoryTypeChanges = changeCategoryTypeChanges;
         this.otherChanges = otherChanges;
+        this.ownerID = ownerID;
     }
     
 }

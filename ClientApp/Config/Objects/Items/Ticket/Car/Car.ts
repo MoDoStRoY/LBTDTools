@@ -26,11 +26,15 @@ export default class Car
     public axisCount: string;
     
     //** Массив со списком изменений в конструкции
-    public upgrades: UpgradeTypes[];
+    public jeepTuningChanges: UpgradeTypes;
+    public truckTuningChanges: UpgradeTypes;
+    public changeCategoryTypeChanges: UpgradeTypes;
+    public otherChanges: UpgradeTypes;
 
     constructor(passport: CarPassport, certificate: CarCertificate, engine: Engine, wheels: Wheels, 
                 breaks: Breaks, gearbox: Gearbox, suspension: Suspension,
-                transmission: Transmission, body: Body, axisCount: string, upgrades: UpgradeTypes[])
+                transmission: Transmission, body: Body, axisCount: string, jeepTuningChanges: UpgradeTypes,
+                truckTuningChanges: UpgradeTypes, changeCategoryTypeChanges: UpgradeTypes, otherChanges: UpgradeTypes,)
     {
         this.passport = passport;
         this.certificate = certificate;
@@ -42,6 +46,9 @@ export default class Car
         this.transmission = transmission;
         this.body = body;
         this.axisCount = axisCount;
-        this.upgrades = upgrades;
+        this.jeepTuningChanges = jeepTuningChanges;
+        this.truckTuningChanges = truckTuningChanges;
+        this.changeCategoryTypeChanges = changeCategoryTypeChanges;
+        this.otherChanges = otherChanges;
     }
 }

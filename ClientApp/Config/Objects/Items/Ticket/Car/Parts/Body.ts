@@ -1,6 +1,5 @@
 export default class Body
 {
-    public number: string;
     public type: string;
     public passengerSeatsFrontRear: string;
     public loadingSpaceType: string;
@@ -10,10 +9,9 @@ export default class Body
     public loadCompartment: string;
     public frame: string;
     
-    constructor(number: string, type: string, passengerSeatsFrontRear: string, loadingSpaceType: string, cabinType: string,
+    constructor(type: string, passengerSeatsFrontRear: string, loadingSpaceType: string, cabinType: string,
                 passengerSeatsBus: string, seatsBus: string, loadCompartment: string, frame: string, carCategory: string) 
     {
-        this.number = number;
         if (carCategory == "M1")
         {
             if (type == "")

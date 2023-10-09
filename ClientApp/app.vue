@@ -10,10 +10,13 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 import {eventBus} from "./boot";
 import HatBar from "./Pages/Components/HatBar.vue";
+import User from "./Config/Objects/SystemFrontObjects/User";
+import TicketsDownload from "./Scripts/Tickets/TicketsDownload";
 
 @Component({
   components: {HatBar}
 })
+
 export default class AppComponent extends Vue {
   key = 0;
   

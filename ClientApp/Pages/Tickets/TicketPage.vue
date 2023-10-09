@@ -246,6 +246,7 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import CommentInCard from "../../Config/Objects/SystemFrontObjects/CommentInCard";
 import TicketBuilder from "../../Config/Objects/SystemFrontObjects/TicketBuilder";
+import User from "../../Config/Objects/SystemFrontObjects/User";
 
 @Component
 export default class TicketsPage extends Vue 
@@ -461,7 +462,31 @@ export default class TicketsPage extends Vue
           this.clientLastName, this.clientName, this.clientMiddleName, this.clientPhoneNumber, this.clientPassportNumber,
           this.clientPassportAuthor, this.clientAddress
       );
-      //this.ticket.currentCar = TicketBuilder.buildCar()
+      this.ticket.currentCar = TicketBuilder.buildCar
+      (
+          //ПТС
+          this.ptsNumber, this.ptsDate, this.VIN, this.carMark, this.carModel, this.carType, this.carDrivingLicense, 
+          this.carCategory, this.carYearProduction, this.engineModel, this.engineNumber, this.chassisNumber, 
+          this.enginePowerHorse, this.enginePowerKwt, this.workVolume, this.engineType, 
+          this.ecoClass, this.maxMass, this.massInDefault, this.carManufacturer, this.otts,
+          //СТС
+          this.stsNumber, this.stsDate, this.carNumber, this.carColor,
+          //Составные части
+          "", "", "", "", "", "", "",
+          "", "", "", "",
+          "", "", "", "",
+          "", "", "",
+          "", "",
+          "", "",
+          "",
+          "", "", "", "", "", "",
+          "", "", "",
+          //Количество осей
+          "",
+          //Массивы с изменениями в конструкции
+          this.ticket.jeepTuningChanges, this.ticket.truckTuningChanges, this.ticket.changeCategoryTypeChanges,
+          this.ticket.otherChanges
+      )
     }
   }
   

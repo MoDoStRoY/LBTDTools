@@ -57,6 +57,7 @@ import Vue from "vue";
 import {Component} from "vue-property-decorator";
 import CommentInCard from "../../Config/Objects/SystemFrontObjects/CommentInCard";
 import TicketPreview from "../../Config/Objects/SystemFrontObjects/TicketPreview";
+import TicketsDownload from "../../Scripts/Tickets/TicketsDownload";
 
 @Component
 export default class TicketsPage extends Vue 
@@ -70,7 +71,7 @@ export default class TicketsPage extends Vue
   data()
   {
     return {
-      listOfNewRequests: [new TicketPreview('1', 'Олег заебал трактор (П 20.07)', '20.07 в 16:18')]
+      listOfNewRequests: TicketsDownload.downloadAllTicketsPreview(this.$root.$data.GlobalStore.userID),
     }
   }
   

@@ -7,6 +7,8 @@ import Validate from 'vuelidate';
 
 import {createRouter} from "./routes";
 import moment from 'moment';
+import User from "./Config/Objects/SystemFrontObjects/User";
+import GlobalStore from "./Config/Objects/SystemFrontObjects/GlobalStore";
 
 Vue.prototype.$moment = moment;
 Vue.use(Buefy, {defaultIconPack: 'fa'});
@@ -26,6 +28,7 @@ export let vue = new Vue({
     router: createRouter(),
     render: h => h(require('./app.vue').default),
     data: {
-        Busy: false
+        Busy: false,
+        GlobalStore
     }
 });
